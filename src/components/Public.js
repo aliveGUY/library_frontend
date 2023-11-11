@@ -17,8 +17,8 @@ const Public = () => {
             Books <br />
             Author <br />
             Reader <br />
-            <a href="читай книги умным будеш, атвечаю">читай книги умным будеш, атвечаю</a>
          </address>
+            <a href="/authors">Автори</a>
          <br />
          </main>
          <footer>

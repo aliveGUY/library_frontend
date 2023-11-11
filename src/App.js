@@ -26,7 +26,13 @@ function App() {
         <Route index element={<UsersList />} />
       </Route>
 
+  
 
+
+      </Route>
+
+      <Route path="users">
+        <Route index element={<UsersList />} />
       </Route>
     </Routes>
   );

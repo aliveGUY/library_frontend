@@ -1,14 +1,14 @@
 const Footer = () => {
 
     return (
-        <footer className="page-footer">
-            <div className="page-footer-container">
-                <p>Цей сайт був створений у рамках навчального курсу МНТУ</p>
-                <span>Автори:</span>
+        <footer>
+            <div className="container">
+                <p>Цей сайт був створений як частина навчального курсу МНТУ</p>
+                Атори:
                 <ul>
-                    <li>Нюня Максим Вітальйович</li>
-                    <li>Іванова Марія Вадисівна</li>
-                    <li>Дубровін Ілля Леонідович</li>
+                    <li>Ілля</li>
+                    <li>Марія</li>
+                    <li>Макс</li>
                 </ul>
             </div>
         </footer>

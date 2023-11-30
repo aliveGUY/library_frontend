@@ -1,70 +1,165 @@
-html,
-body {
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap');
+
+/* ---------{ Global Important Styles }--------- */
+* {
   margin: 0;
-  color: white;
-  font-family: 'Rubik', sans-serif;
+  padding: 0;
+  font-family: 'Montserrat Alternates', sans-serif;
 }
 
-a {
-  color: rgb(126, 181, 245);
+:root {
+  --global-background: #FAF1E4;
+  --dark-green: #435334;
+  --green: #9EB384;
+  --light-green: #CEDEBD;
+  --red: #BE3144;
 }
 
 
-.wrapper {
+.App {
   min-height: 100vh;
   display: flex;
+  gap: 3rem;
   flex-direction: column;
+  background-color: var(--global-background);
 }
 
-.page-header,
-.page-footer {
+header,
+footer {
   flex: 0;
   flex-shrink: 0;
-  background-color: rgb(23, 68, 36);
-
 }
 
-.page-body {
-  background-color: rgb(32, 42, 58);
+.pages-wrapper {
   flex: 1;
 }
 
-.page-body-container,
-.page-header-container,
-.page-footer-container {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 0 3rem;
+ul {
+  list-style: none;
 }
 
-/* Header */
-
-.page-header-container {
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-}
-
-.page-header-container a {
-  font-size: 1.5rem;
-  text-decoration: none;
+a {
   color: white;
 }
 
-/* Footer */
-
-.page-footer{
-  padding: 3rem;
-} 
-
-.page-footer-container {
-  text-align: center;
+/* ---------{ Navbar Styles }--------- */
+header {
+  padding: 0 4rem;
 }
 
-.page-footer-container ul{
-  width: fit-content;
+header .container {
+  border-radius: 0 0 40px 40px;
+  color: white;
+  background-color: var(--dark-green);
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 1.5rem;
+  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------{ Pages Styles }--------- */
+.pages-wrapper {
+  padding: 0 4rem;
+}
+
+.pages {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.books {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.book {
+  padding: 1.5rem;
+  background-color: var(--green);
+  border-radius: 13px;
+  border: 5px solid var(--light-green);
+  width: 200px;
+  height: 300px;
+  box-sizing: border-box;
+  display: flex;
+  gap: .5rem;
+  flex-direction: column;
+  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.book .description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.book .author {
+  margin-top: auto;
+  bottom: 0;
+}
+
+.error {
+  text-align: left;
+  grid-column: 1 / -1;
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--red);
+}
+
+form {
+  padding: 1.5rem;
+  background-color: var(--green);
+  border-radius: 13px;
+  border: 5px solid var(--light-green);
+  display: grid;
+  align-items: center;
+  text-align: right;
+  gap: 0.5rem 1rem;
+  grid-template-columns: auto 1fr;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form button {
+  cursor: pointer;
+  grid-column: 1 / -1;
+  margin-left: auto;
+  margin-right: 2rem;
+  padding: .5rem 1rem;
+  border: none;
+  font-weight: bold;
+  background-color: var(--light-green);
+}
+
+form button:hover {
+  background-color: var(--dark-green);
+  color: white;
+}
+
+form button:active {
+  background-color: var(--light-green);
+  color: white;
+}
+
+form input {
+  border-radius: 50px;
+  border: none;
+  padding: 10px;
+  background-color: var(--global-background);
+}
+
+/* ---------{ Footer Styles }--------- */
+footer {
+  padding: 0 4rem;
+}
+
+footer .container {
+  border-radius: 40px 40px 0 0;
+  padding: 1.5rem;
+  color: white;
+  background-color: var(--dark-green);
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
 }

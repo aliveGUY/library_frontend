@@ -13,6 +13,7 @@
   --green: #9EB384;
   --light-green: #CEDEBD;
   --red: #BE3144;
+  --gray: #D8D9DA;
 }
 
 
@@ -42,6 +43,33 @@ a {
   color: white;
 }
 
+button {
+  cursor: pointer;
+  grid-column: 1 / -1;
+  margin-left: auto;
+  margin-right: 2rem;
+  padding: .5rem 1rem;
+  border: none;
+  font-weight: bold;
+  background-color: var(--light-green);
+}
+
+button:hover {
+  background-color: var(--dark-green);
+  color: white;
+}
+
+button:active {
+  background-color: var(--light-green);
+  color: white;
+}
+
+button:disabled {
+  background-color: var(--gray);
+  color: white;
+  cursor: not-allowed;
+}
+
 /* ---------{ Navbar Styles }--------- */
 header {
   padding: 0 4rem;
@@ -55,6 +83,8 @@ header .container {
   margin: 0 auto;
   padding: 1.5rem;
   box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
 }
 
 /* ---------{ Pages Styles }--------- */
@@ -69,7 +99,8 @@ header .container {
 
 .books {
   display: flex;
-  gap: .5rem;
+  gap: 2rem;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -93,6 +124,8 @@ header .container {
 }
 
 .book .author {
+  z-index: 10;
+  box-shadow: 0 -30px 38px 10px var(--green);
   margin-top: auto;
   bottom: 0;
 }
@@ -106,6 +139,7 @@ header .container {
 }
 
 form {
+  margin-top: 3rem;
   padding: 1.5rem;
   background-color: var(--green);
   border-radius: 13px;
@@ -115,31 +149,11 @@ form {
   text-align: right;
   gap: 0.5rem 1rem;
   grid-template-columns: auto 1fr;
+  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 form label {
   font-weight: bold;
-}
-
-form button {
-  cursor: pointer;
-  grid-column: 1 / -1;
-  margin-left: auto;
-  margin-right: 2rem;
-  padding: .5rem 1rem;
-  border: none;
-  font-weight: bold;
-  background-color: var(--light-green);
-}
-
-form button:hover {
-  background-color: var(--dark-green);
-  color: white;
-}
-
-form button:active {
-  background-color: var(--light-green);
-  color: white;
 }
 
 form input {

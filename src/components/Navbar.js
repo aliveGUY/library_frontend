@@ -8,6 +8,9 @@ const Navbar = () => {
                 <Link to="/">
                     <h1>Бібліотека</h1>
                 </Link>
+                <button disabled>
+                    login
+                </button>
             </div>
         </header>
     )

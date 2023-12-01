@@ -1,9 +1,12 @@
 import { useState } from "react"
+import { useBooksContext } from "../hooks/useBooksContext"
+import { CREATE_BOOK } from "../constants/reducerActions"
 
 const BookForm = () => {
-  const [title, setTitle] = useState()
-  const [description, setDescription] = useState()
-  const [author, setAuthor] = useState()
+  const { dispatch } = useBooksContext("")
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [author, setAuthor] = useState("")
   const [error, setError] = useState(null)
 
   const handleSubmit = async (e) => {
@@ -34,17 +37,18 @@ const BookForm = () => {
       setDescription('')
       setAuthor('')
       console.log('new book added ', json)
+      dispatch({ type: CREATE_BOOK, payload: json })
     }
   }
 
   return (
     <form onSubmit={handleSubmit}>
       {error && <div className="error">{error}</div>}
-      <label for="title">Title:</label>
+      <label htmlFor="title">Title:</label>
       <input name="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
-      <label for="author">Author:</label>
+      <label htmlFor="author">Author:</label>
       <input name="author" type="text" onChange={(e) => setAuthor(e.target.value)} value={author} />
-      <label for="description">Description:</label>
+      <label htmlFor="description">Description:</label>
       <input name="description" type="text" onChange={(e) => setDescription(e.target.value)} value={description} />
       <button type="submit">Submit</button>
     </form>

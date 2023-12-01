@@ -7,6 +7,7 @@ const BookForm = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [author, setAuthor] = useState("")
+  const [price, setPrice] = useState("")
   const [error, setError] = useState(null)
 
   const handleSubmit = async (e) => {
@@ -15,7 +16,8 @@ const BookForm = () => {
     const book = {
       title,
       description,
-      author
+      author,
+      price
     }
 
     const response = await fetch('https://library-uni-project-api.onrender.com/books', {
@@ -36,6 +38,7 @@ const BookForm = () => {
       setTitle('')
       setDescription('')
       setAuthor('')
+      setPrice('')
       console.log('new book added ', json)
       dispatch({ type: CREATE_BOOK, payload: json })
     }
@@ -50,6 +53,8 @@ const BookForm = () => {
       <input name="author" type="text" onChange={(e) => setAuthor(e.target.value)} value={author} />
       <label htmlFor="description">Description:</label>
       <input name="description" type="text" onChange={(e) => setDescription(e.target.value)} value={description} />
+      <label htmlFor="price">Price:</label>
+      <input name="price" type="text" onChange={(e) => setPrice(e.target.value)} value={price} />
       <button type="submit">Submit</button>
     </form>
   )

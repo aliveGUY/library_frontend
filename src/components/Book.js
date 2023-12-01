@@ -2,7 +2,7 @@ import { DELETE_BOOK } from "../constants/reducerActions"
 import { useBooksContext } from "../hooks/useBooksContext"
 
 const Book = ({ book }) => {
-  const { title, description, author, _id } = book
+  const { title, description, author, price, _id } = book
   const { dispatch } = useBooksContext()
 
   const handleDelete = async () => {
@@ -18,13 +18,14 @@ const Book = ({ book }) => {
   }
 
   return (
-    <div className="book">
+    <a href={`book/${_id}`} className="book">
       <h3 className="title">{title}</h3>
       <hr color="#000000" />
       <p className="description">{description}</p>
       <b className="author">by {author}</b>
+      <b className="price"> {price} </b>
       <span onClick={handleDelete}>delete</span>
-    </div>
+    </a>
   )
 }
 

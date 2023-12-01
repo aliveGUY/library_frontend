@@ -87,6 +87,19 @@ header .container {
   justify-content: space-between;
 }
 
+.logo {
+  font-size: 1rem;
+}
+
+@media (min-width: 1000px) {
+  .logo {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1900px) {}
+
+
 /* ---------{ Pages Styles }--------- */
 .pages-wrapper {
   padding: 0 4rem;
@@ -144,12 +157,10 @@ form {
   background-color: var(--green);
   border-radius: 13px;
   border: 5px solid var(--light-green);
-  display: grid;
-  align-items: center;
-  text-align: right;
   gap: 0.5rem 1rem;
-  grid-template-columns: auto 1fr;
   box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
 }
 
 form label {
@@ -162,6 +173,17 @@ form input {
   padding: 10px;
   background-color: var(--global-background);
 }
+
+@media (min-width: 1000px) {
+  form {
+    grid-template-columns: auto 1fr;
+    display: grid;
+    align-items: center;
+    text-align: right;
+  }
+}
+
+@media (min-width: 1900px) {}
 
 /* ---------{ Footer Styles }--------- */
 footer {
@@ -177,3 +199,7 @@ footer .container {
   margin: 0 auto;
   box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
 }
+
+@media (min-width: 1000px) {}
+
+@media (min-width: 1900px) {}

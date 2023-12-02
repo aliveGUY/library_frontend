@@ -1,33 +1,36 @@
-import { useEffect } from "react"
 import Book from "../components/Book"
 import BookForm from "../components/BookForm"
-import { useBooksContext } from "../hooks/useBooksContext"
-import { SET_BOOKS } from "../constants/reducerActions"
+import { useGetBooksQuery } from "../app/api/booksSlice"
+import LoadingSpinner from "../components/LoadingSpinner"
+import Error from "../components/Error"
+import { useEffect } from "react"
 
 const Home = () => {
-  const { books, dispatch } = useBooksContext()
+  const {
+    data: books,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetBooksQuery()
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      const response = await fetch('https://library-uni-project-api.onrender.com/books')
-      const json = await response.json()
-      if (response.ok) {
-        dispatch({ type: SET_BOOKS, payload: json })
-      }
-    }
-    fetchBooks()
-  }, [])
+  let content
 
-  return (
-    <div className="Home">
-      <div className="books">
-        {books && books.map((book) =>
-          <Book book={book} key={book._id} />
-        )}
+  if (isError) content = <Error error={error} />
+  if (isLoading) content = <LoadingSpinner />
+
+  if (isSuccess) {
+    content = (
+      <div className="Home">
+        <div className="books">
+          {books.ids.map(book => <Book bookId={book} key={book} />)}
+        </div>
+        <BookForm />
       </div>
-      <BookForm />
-    </div>
-  )
+    )
+  }
+
+  return content
 }
 
 export default Home

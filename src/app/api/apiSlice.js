@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { logOut, setCredentials } from './authSlice'
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:4000',
+    baseUrl: 'https://library-uni-project-api.onrender.com',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token

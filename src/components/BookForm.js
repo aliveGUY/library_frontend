@@ -1,22 +1,66 @@
-import { useState } from "react"
-import { useBooksContext } from "../hooks/useBooksContext"
-import { CREATE_BOOK } from "../constants/reducerActions"
+import { useEffect, useState } from "react"
+import { useAddNewBookMutation } from "../app/api/booksSlice"
+import { selectCurrentUser } from "../app/api/authSlice"
+import { useSelector } from "react-redux"
+import LoadingSpinner from "./LoadingSpinner"
+import { useNavigate } from "react-router-dom"
+import Error from "./Error"
+
+const priceRegex = /^\$?\d+(\.\d{1,2})?$/
+
 
 const BookForm = () => {
-  const { dispatch } = useBooksContext("")
+  const user = useSelector(selectCurrentUser)
+  const navigate = useNavigate()
+
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [author, setAuthor] = useState("")
   const [price, setPrice] = useState("")
+<<<<<<< HEAD
+
+  const [addNewBook, {
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  }] = useAddNewBookMutation()
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTitle('')
+      setDescription('')
+      setAuthor('')
+      setPrice('')
+      navigate('/')
+    }
+  }, [isSuccess, navigate])
+
+  const canSave = [title, description, author, price, user].every(Boolean) && !isLoading
+=======
   const [error, setError] = useState(null)
+>>>>>>> develop
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (!priceRegex.test(price)) {
+      setPrice('')
+      return
+    }
 
     const book = {
       title,
       description,
       author,
+<<<<<<< HEAD
+      price,
+      user: user._id,
+    }
+
+    if (canSave) {
+      await addNewBook(book)
+=======
       price
     }
 
@@ -41,21 +85,53 @@ const BookForm = () => {
       setPrice('')
       console.log('new book added ', json)
       dispatch({ type: CREATE_BOOK, payload: json })
+>>>>>>> develop
     }
   }
 
-  return (
+  if (isError) return <Error error={error} />
+
+  return isLoading ? <LoadingSpinner /> : (
     <form onSubmit={handleSubmit}>
-      {error && <div className="error">{error}</div>}
       <label htmlFor="title">Title:</label>
-      <input name="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
+      <input
+        name="title"
+        type="text"
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+      />
+
       <label htmlFor="author">Author:</label>
-      <input name="author" type="text" onChange={(e) => setAuthor(e.target.value)} value={author} />
+      <input
+        name="author"
+        type="text"
+        onChange={(e) => setAuthor(e.target.value)}
+        value={author}
+      />
+
       <label htmlFor="description">Description:</label>
+<<<<<<< HEAD
+      <input
+        name="description"
+        type="text"
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
+      />
+
+      <label htmlFor="price">Price:</label>
+      <input
+        name="price"
+        type="text"
+        onChange={(e) => setPrice(e.target.value)}
+        value={price}
+      />
+      <button type="submit" disabled={!canSave}>Submit</button>
+=======
       <input name="description" type="text" onChange={(e) => setDescription(e.target.value)} value={description} />
       <label htmlFor="price">Price:</label>
       <input name="price" type="text" onChange={(e) => setPrice(e.target.value)} value={price} />
       <button type="submit">Submit</button>
+>>>>>>> develop
     </form>
   )
 }

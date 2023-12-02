@@ -132,6 +132,8 @@ header .container {
   box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+
+
 .book .description {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -199,6 +201,22 @@ footer .container {
   max-width: 1000px;
   margin: 0 auto;
   box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.info{
+  padding-bottom: 40px;
+}
+
+.cont{
+  padding-top: 20px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.desc{
+  padding-top: 20px;
+  padding-left: 40px;
+
 }
 
 @media (min-width: 1000px) {}

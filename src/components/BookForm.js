@@ -17,7 +17,6 @@ const BookForm = () => {
   const [description, setDescription] = useState("")
   const [author, setAuthor] = useState("")
   const [price, setPrice] = useState("")
-<<<<<<< HEAD
 
   const [addNewBook, {
     isLoading,
@@ -37,9 +36,6 @@ const BookForm = () => {
   }, [isSuccess, navigate])
 
   const canSave = [title, description, author, price, user].every(Boolean) && !isLoading
-=======
-  const [error, setError] = useState(null)
->>>>>>> develop
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -53,39 +49,12 @@ const BookForm = () => {
       title,
       description,
       author,
-<<<<<<< HEAD
       price,
       user: user._id,
     }
 
     if (canSave) {
       await addNewBook(book)
-=======
-      price
-    }
-
-    const response = await fetch('https://library-uni-project-api.onrender.com/books', {
-      method: 'POST',
-      body: JSON.stringify(book),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    const json = await response.json()
-
-    if (!response.ok) {
-      setError(json.error)
-    }
-    if (response.ok) {
-      setError(json.error)
-      setTitle('')
-      setDescription('')
-      setAuthor('')
-      setPrice('')
-      console.log('new book added ', json)
-      dispatch({ type: CREATE_BOOK, payload: json })
->>>>>>> develop
     }
   }
 
@@ -110,7 +79,6 @@ const BookForm = () => {
       />
 
       <label htmlFor="description">Description:</label>
-<<<<<<< HEAD
       <input
         name="description"
         type="text"
@@ -126,12 +94,6 @@ const BookForm = () => {
         value={price}
       />
       <button type="submit" disabled={!canSave}>Submit</button>
-=======
-      <input name="description" type="text" onChange={(e) => setDescription(e.target.value)} value={description} />
-      <label htmlFor="price">Price:</label>
-      <input name="price" type="text" onChange={(e) => setPrice(e.target.value)} value={price} />
-      <button type="submit">Submit</button>
->>>>>>> develop
     </form>
   )
 }

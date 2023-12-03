@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
-import { useAddNewBookMutation } from "../app/api/booksSlice"
+import { useAddAddNewBookMutation } from "../app/api/booksSlice"
 import { selectCurrentUser } from "../app/api/authSlice"
 import { useSelector } from "react-redux"
-import LoadingSpinner from "./LoadingSpinner"
 import { useNavigate } from "react-router-dom"
-import Error from "./Error"
+import Error from "../components/Error"
+import LoadingSpinner from "../components/LoadingSpinner"
 
 const priceRegex = /^\$?\d+(\.\d{1,2})?$/
 
 
-const BookForm = () => {
+const AddNewBook = () => {
   const user = useSelector(selectCurrentUser)
   const navigate = useNavigate()
 
@@ -18,12 +18,12 @@ const BookForm = () => {
   const [author, setAuthor] = useState("")
   const [price, setPrice] = useState("")
 
-  const [addNewBook, {
+  const [addAddNewBook, {
     isLoading,
     isSuccess,
     isError,
     error
-  }] = useAddNewBookMutation()
+  }] = useAddAddNewBookMutation()
 
   useEffect(() => {
     if (isSuccess) {
@@ -54,7 +54,7 @@ const BookForm = () => {
     }
 
     if (canSave) {
-      await addNewBook(book)
+      await addAddNewBook(book)
     }
   }
 
@@ -93,9 +93,9 @@ const BookForm = () => {
         onChange={(e) => setPrice(e.target.value)}
         value={price}
       />
-      <button type="submit" disabled={!canSave}>Submit</button>
+      <button type="submit" className="button" disabled={!canSave}>Submit</button>
     </form>
   )
 }
 
-export default BookForm
+export default AddNewBook

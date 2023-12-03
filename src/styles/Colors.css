@@ -1,0 +1,10 @@
+:root {
+    --global-background: #FAF1E4;
+    --dark-green: #435334;
+    --green: #9EB384;
+    --light-green: #CEDEBD;
+    --red: #BE3144;
+    --gray: #D8D9DA;
+
+    --shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+  }

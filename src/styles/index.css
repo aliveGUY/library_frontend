@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap');
+@import "./InfoBook.css";
+@import "./DropDown.css";
+@import "./Book.css";
+@import "./Colors.css";
+@import "./LoadingSpinner.css";
+
+/* ---------{ Global Important Styles }--------- */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  gap: 3rem;
+  flex-direction: column;
+  background-color: var(--global-background);
+}
+
+header,
+footer {
+  flex: 0;
+  flex-shrink: 0;
+}
+
+.pages-wrapper {
+  flex: 1;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: white;
+}
+
+.button {
+  cursor: pointer;
+  grid-column: 1 / -1;
+  margin-left: auto;
+  margin-right: 2rem;
+  padding: .5rem 1rem;
+  border: none;
+  font-weight: bold;
+  background-color: var(--light-green);
+}
+
+.button:hover {
+  background-color: var(--dark-green);
+  color: white;
+}
+
+.button:active {
+  background-color: var(--light-green);
+  color: white;
+}
+
+.button:disabled {
+  background-color: var(--gray);
+  color: white;
+  cursor: not-allowed;
+}
+
+/* ---------{ Navbar Styles }--------- */
+header {
+  padding: 0 2rem;
+}
+
+header .container {
+  border-radius: 0 0 40px 40px;
+  color: white;
+  background-color: var(--dark-green);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem;
+}
+
+@media (min-width: 900px) {
+  header .container{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1900px) {}
+
+
+/* ---------{ Pages Styles }--------- */
+.pages-wrapper {
+  padding: 0 2rem;
+}
+
+.pages {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.error {
+  text-align: left;
+  grid-column: 1 / -1;
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--red);
+}
+
+form {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background-color: var(--green);
+  border-radius: 13px;
+  border: 5px solid var(--light-green);
+  gap: 0.5rem 1rem;
+  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input {
+  border-radius: 50px;
+  border: none;
+  padding: 10px;
+  background-color: var(--global-background);
+}
+
+@media (min-width: 1000px) {
+  form {
+    grid-template-columns: auto 1fr;
+    display: grid;
+    align-items: center;
+    text-align: right;
+  }
+}
+
+@media (min-width: 1900px) {}
+
+/* ---------{ Footer Styles }--------- */
+footer {
+  padding: 0 2rem;
+}
+
+footer .container {
+  border-radius: 40px 40px 0 0;
+  padding: 1.5rem;
+  color: white;
+  background-color: var(--dark-green);
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 1000px) {}
+
+@media (min-width: 1900px) {}
+

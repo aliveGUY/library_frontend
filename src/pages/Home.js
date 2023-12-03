@@ -1,9 +1,7 @@
 import Book from "../components/Book"
-import BookForm from "../components/BookForm"
 import { useGetBooksQuery } from "../app/api/booksSlice"
 import LoadingSpinner from "../components/LoadingSpinner"
 import Error from "../components/Error"
-import { useEffect } from "react"
 
 const Home = () => {
   const {
@@ -25,7 +23,6 @@ const Home = () => {
         <div className="books">
           {books.ids.map(book => <Book bookId={book} key={book} />)}
         </div>
-        <BookForm />
       </div>
     )
   }

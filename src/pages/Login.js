@@ -5,12 +5,15 @@ import { useLoginMutation } from '../app/api/authApiSlice'
 import { setCredentials } from "../app/api/authSlice"
 import LoadingSpinner from "../components/LoadingSpinner"
 
+import usePersist from "../hooks/usePersist"
+
 const Login = () => {
   const userRef = useRef()
   const errRef = useRef()
   const [username, setUser] = useState('')
   const [password, setPwd] = useState('')
   const [errMsg, setErrMsg] = useState('')
+  const [persist, setPersist] = usePersist()
   const navigate = useNavigate()
 
   const [login, { isLoading }] = useLoginMutation()
@@ -49,7 +52,7 @@ const Login = () => {
   }
 
   const handleUserInput = (e) => setUser(e.target.value)
-
+  const handleToggle = () => setPersist(prev => !prev)
   const handlePwdInput = (e) => setPwd(e.target.value)
 
   const content = isLoading ? <LoadingSpinner /> : (
@@ -77,6 +80,17 @@ const Login = () => {
           value={password}
           required
         />
+
+        <label htmlFor="persist">
+          <input
+            type="checkbox"
+            id="persist"
+            onChange={handleToggle}
+            checked={persist}
+          />
+          Trust This Device
+        </label>
+
         <button>Sign In</button>
       </form>
     </section>

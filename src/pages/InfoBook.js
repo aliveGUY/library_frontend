@@ -1,33 +1,41 @@
-import { useState, useEffect } from "react"
 import Book from "../components/Book"
-
+import { useLocation } from "react-router-dom"
+import { useGetBookByIdQuery } from "../app/api/booksSlice"
+import LoadingSpinner from "../components/LoadingSpinner"
+import Error from "../components/Error"
 
 const InfoBook = () => {
-    
-    const [book, sitebook] = useState()
-    console.log (book)
-    useEffect(() => {
-        const fetchBooks = async () => {
-          const response = await fetch('https://library-uni-project-api.onrender.com/books/6569cfa473b3fd5ca88983f9')
-          const json = await response.json()
-          if (response.ok) {
-            sitebook( json )
-          }
-        }
-        fetchBooks()
-      }, [])
-    
-      if (!book) {
-        return
-      }
+  const { pathname } = useLocation()
+  const regex = /\/book\/([a-fA-F0-9]+)/
+  const id = pathname.match(regex)[1]
 
-    return (<div>
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetBookByIdQuery({ id })
+
+  if (isError) return <Error error={error} />
+
+  if (isLoading) return <LoadingSpinner />
+
+  if (isSuccess) {
+    const book = data.entities[id]
+    const { title, description, author, price } = book
+    return (
+      <div>
         <h2 className="info">Info Book</h2>
-        {book&&<Book book ={book}  />}
+        <Book book={book} disabled />
         <p className="cont">Description:</p>
-        <p className="desc">{book.description}</p>
-        <p className="pri">{book.price}</p>
-    </div>)
+        <p className="desc">{title}</p>
+        <p className="desc">{description}</p>
+        <p className="desc">{author}</p>
+        <p className="pri">{price}</p>
+      </div>
+    )
+  }
 }
 
 export default InfoBook

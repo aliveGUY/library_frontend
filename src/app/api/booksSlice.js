@@ -28,7 +28,27 @@ export const booksApiSlice = apiSlice.injectEndpoints({
         } else return [{ type: 'Book', id: 'LIST' }]
       }
     }),
-    addNewBook: builder.mutation({
+
+
+    getBookById: builder.query({
+      query: ({ id }) => `/books/${id}`,
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError
+      },
+      transformResponse: responseData => {
+        const { _id: id, ...rest } = responseData
+        const loadedBook = { id, ...rest }
+        console.log(loadedBook)
+
+        return booksAdapter.setOne(initialState, loadedBook)
+      },
+      invalidatesTags: [
+        { type: 'Book', id: "LIST" }
+      ]
+    }),
+
+
+    addAddNewBook: builder.mutation({
       query: initialBook => ({
         url: '/books',
         method: 'POST',
@@ -40,6 +60,8 @@ export const booksApiSlice = apiSlice.injectEndpoints({
         { type: 'Book', id: "LIST" }
       ]
     }),
+
+
     updateBook: builder.mutation({
       query: initialBook => ({
         url: `/books/${initialBook._id}`,
@@ -52,6 +74,8 @@ export const booksApiSlice = apiSlice.injectEndpoints({
         { type: 'Book', id: "LIST" }
       ]
     }),
+
+
     deleteBook: builder.mutation({
       query: ({ id }) => ({
         url: `/books/${id}`,
@@ -66,9 +90,10 @@ export const booksApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetBooksQuery,
-  useAddNewBookMutation,
+  useGetBookByIdQuery,
+  useAddAddNewBookMutation,
   useUpdateBookMutation,
-  useDeleteBookMutation
+  useDeleteBookMutation,
 } = booksApiSlice
 
 export const selectBooksResult = booksApiSlice.endpoints.getBooks.select()

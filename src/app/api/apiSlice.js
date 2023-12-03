@@ -1,8 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { logOut, setCredentials } from './authSlice'
 
+const modes = [
+    'https://library-uni-project-api.onrender.com',
+    'http://localhost:4000'
+]
+
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://library-uni-project-api.onrender.com',
+    baseUrl: modes[0],
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token
@@ -20,7 +25,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         console.log('sending refresh token')
         // send refresh token to get new access token 
         const refreshResult = await baseQuery('/refresh', api, extraOptions)
-        console.log(refreshResult)
         if (refreshResult?.data) {
             const user = api.getState().auth.user
             // store the new token 

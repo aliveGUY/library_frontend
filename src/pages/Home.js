@@ -21,7 +21,7 @@ const Home = () => {
     content = (
       <div className="Home">
         <div className="books">
-          {books.ids.map(book => <Book bookId={book} key={book} />)}
+          {Object.values(books.entities).map((book, index) => <Book book={book} key={index} />)}
         </div>
       </div>
     )

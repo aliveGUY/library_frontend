@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { selectBookById } from "../app/api/booksSlice"
-import { useSelector } from "react-redux"
 
-
-const Book = ({ book, bookId, disabled }) => {
+const Book = ({ book, disabled }) => {
+  const { _id: id, title, description, author } = book
   const navigate = useNavigate()
-  const { title, description, author } = useSelector(state => selectBookById(state, bookId)) || book
-  const handleEdit = () => navigate(`/book/${bookId}`)
+  const handleEdit = () => navigate(`/book/${id}`)
 
   return (
     <button className="book" onClick={handleEdit} disabled={disabled}>

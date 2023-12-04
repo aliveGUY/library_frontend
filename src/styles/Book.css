@@ -19,6 +19,7 @@
 }
 
 .book {
+  cursor: pointer;
   padding: 1rem;
   background-color: var(--green);
   border-radius: 13px;

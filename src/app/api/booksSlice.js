@@ -38,7 +38,6 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       transformResponse: responseData => {
         const { _id: id, ...rest } = responseData
         const loadedBook = { id, ...rest }
-        console.log(loadedBook)
 
         return booksAdapter.setOne(initialState, loadedBook)
       },

@@ -30,27 +30,27 @@ const Navbar = () => {
   if (isError) return <Error error={error} />
 
   const loginButton = (
-    <button className="login" onClick={() => navigate('/login')}>
+    <div className="login" onClick={() => navigate('/login')}>
       login
-    </button>
+    </div>
   )
 
   const logoutButton = (
-    <button onClick={sendLogout}>
+    <li onClick={sendLogout}>
       Logout
-    </button>
+    </li>
   )
 
   const userLink = (
-    <button onClick={() => navigate('/account')}>
+    <li onClick={() => navigate('/account')}>
       Account Info
-    </button>
+    </li>
   )
 
   const AddNewBook = (
-    <button onClick={() => navigate('/book/new')}>
+    <li onClick={() => navigate('/book/new')}>
       Add New Book
-    </button>
+    </li>
   )
 
   const profileDrowDown = (
@@ -58,9 +58,9 @@ const Navbar = () => {
       <span className="userIcon"><FontAwesomeIcon icon={faUser} /></span>
       <span className="userName">{user?.username}</span>
       <ul className="dropDown">
-        <li>{userLink}</li>
-        <li>{AddNewBook}</li>
-        <li>{logoutButton}</li>
+        {userLink}
+        {AddNewBook}
+        {logoutButton}
       </ul>
     </button>
   )

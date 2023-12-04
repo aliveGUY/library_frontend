@@ -46,6 +46,27 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       ]
     }),
 
+    getBooksByUser: builder.query({
+      query: ({ id }) => `/books/added-by/${id}`,
+      validateStatus: (response, result) => {
+        return response.status === 200 && !result.isError
+      },
+      transformResponse: responseData => {
+        const loadedBooks = responseData.map(book => {
+          book.id = book._id
+          return book
+        })
+        return booksAdapter.setAll(initialState, loadedBooks)
+      },
+      providesTags: (result, error, arg) => {
+        if (result?.ids) {
+          return [
+            { type: 'Book', id: 'LIST' },
+            ...result.ids.map(id => ({ type: 'Book', id }))
+          ]
+        } else return [{ type: 'Book', id: 'LIST' }]
+      }
+    }),
 
     addAddNewBook: builder.mutation({
       query: initialBook => ({
@@ -90,6 +111,7 @@ export const booksApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetBooksQuery,
   useGetBookByIdQuery,
+  useGetBooksByUserQuery,
   useAddAddNewBookMutation,
   useUpdateBookMutation,
   useDeleteBookMutation,

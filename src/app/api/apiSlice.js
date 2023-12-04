@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setCredentials } from './authSlice'
 
+// http://localhost:4000/
+// https://library-uni-project-api.onrender.com
+
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://library-uni-project-api.onrender.com',
     credentials: 'include',

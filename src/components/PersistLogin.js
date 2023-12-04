@@ -22,8 +22,7 @@ const PersistLogin = () => {
   }] = useRefreshMutation()
 
   useEffect(() => {
-    console.log(`effectRan: ${effectRan.current === true}`)
-    if (effectRan.current === true) {
+    if (effectRan.current === true || process.env.NODE_ENV !== 'development') {
 
       const verufyRefreshTokeen = async () => {
         try {
@@ -34,7 +33,6 @@ const PersistLogin = () => {
           console.log(err)
         }
       }
-      console.log(`will refresh: ${!token && persist}`)
       if (!token && persist) verufyRefreshTokeen()
     }
     return () => effectRan.current = true

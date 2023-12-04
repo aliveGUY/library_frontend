@@ -69,7 +69,7 @@ const Navbar = () => {
     <header>
       <div className="container">
         <Link to="/">
-          <h1 className="logo">Бібліотека</h1>
+          <h1 className="logo">IMBook</h1>
         </Link>
         <nav>
           {loggedIn

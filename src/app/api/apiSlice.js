@@ -5,7 +5,7 @@ import { setCredentials } from './authSlice'
 // https://library-uni-project-api.onrender.com
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:4000/',
+    baseUrl: 'https://library-uni-project-api.onrender.com',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token

@@ -1,0 +1,8 @@
+static:
+  - source: /static
+    destination: /static
+
+routes:
+  - source: /*
+    status: 200
+    destination: /index.html

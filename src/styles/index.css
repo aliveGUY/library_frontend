@@ -4,6 +4,7 @@
 @import "./Book.css";
 @import "./Colors.css";
 @import "./LoadingSpinner.css";
+@import "./Users.css";
 
 /* ---------{ Global Important Styles }--------- */
 * {
@@ -34,8 +35,9 @@ ul {
   list-style: none;
 }
 
-a {
+.logo {
   color: white;
+  text-decoration: none;
 }
 
 .button {
@@ -137,6 +139,10 @@ form input {
   border: none;
   padding: 10px;
   background-color: var(--global-background);
+}
+
+.signupLink {
+  margin-top: 2rem;
 }
 
 @media (min-width: 1000px) {

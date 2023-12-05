@@ -1,17 +1,15 @@
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import usePersist from '../hooks/usePersist'
 import { useRefreshMutation } from "../app/api/authApiSlice"
-import { selectCurrentToken } from '../app/api/authSlice'
-import { useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
+import LoadingSpinner from './LoadingSpinner'
+import Error from './Error'
 
 const PersistLogin = () => {
   const [persist] = usePersist()
-  const token = useSelector(selectCurrentToken)
   const effectRan = useRef(false)
 
   const [trueSuccess, setTrueSuccess] = useState(false)
-
 
   const [refresh, {
     isUninitialized,
@@ -33,12 +31,23 @@ const PersistLogin = () => {
           console.log(err)
         }
       }
-      if (!token && persist) verufyRefreshTokeen()
+      if (persist) verufyRefreshTokeen()
     }
     return () => effectRan.current = true
   }, [])
 
-  return <Outlet />
+  let content
+  if (!persist) {
+    content = <Outlet />
+  } else if (isLoading) {
+    content = <LoadingSpinner />
+  } else if (isError) {
+    content = <Outlet />
+  } else if (isSuccess && trueSuccess || isUninitialized) {
+    content = <Outlet />
+  }
+
+  return content
 }
 
 export default PersistLogin

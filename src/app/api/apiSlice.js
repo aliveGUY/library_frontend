@@ -5,15 +5,8 @@ import { setCredentials } from './authSlice'
 // https://library-uni-project-api.onrender.com
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://library-uni-project-api.onrender.com',
-    credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token
-        if (token) {
-            headers.set("authorization", `Bearer ${token}`)
-        }
-        return headers
-    }
+    baseUrl: 'http://localhost:4000',
+    credentials: 'include'
 })
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {

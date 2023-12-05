@@ -30,7 +30,7 @@ const Navbar = () => {
   if (isError) return <Error error={error} />
 
   const loginButton = (
-    <div className="login" onClick={() => navigate('/login')}>
+    <div className="loginButton" onClick={() => navigate('/login')}>
       login
     </div>
   )
@@ -53,6 +53,12 @@ const Navbar = () => {
     </li>
   )
 
+  const ManageUsers = (
+    <li onClick={() => navigate('/users')}>
+      Manage All Users
+    </li>
+  )
+
   const profileDrowDown = (
     <button className={`accountDropDown ${dropDown}`} onClick={() => setDropDown(prev => !prev)}>
       <span className="userIcon"><FontAwesomeIcon icon={faUser} /></span>
@@ -60,6 +66,7 @@ const Navbar = () => {
       <ul className="dropDown">
         {userLink}
         {AddNewBook}
+        {ManageUsers}
         {logoutButton}
       </ul>
     </button>
@@ -69,7 +76,7 @@ const Navbar = () => {
     <header>
       <div className="container">
         <Link to="/">
-          <h1 className="logo">Бібліотека</h1>
+          <h1 className="logo">IMBook</h1>
         </Link>
         <nav>
           {loggedIn

@@ -11,15 +11,48 @@ const Users = () => {
     error
   } = useGetUsersQuery()
 
-  if (isError) return <Error error={error} />
+  let content
+  if (isError) content = <Error error={error} />
+  if (isLoading) content = <LoadingSpinner />
 
-  return isLoading && !isSuccess
-    ? <LoadingSpinner />
-    : (
+  if (isSuccess) {
+    const usersData = Object.values(users.entities)
+    console.log(usersData)
+    content = (
       <div className="Home">
         <h2>users</h2>
+        <table className="usersTable" >
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Roles</th>
+              <th className="additional">Cart Items</th>
+              <th className="additional">Posted Book</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {usersData.map((user, idx) => {
+              const { username, roles } = user
+              return (
+                <tr>
+                  <th>{username}</th>
+                  <th>{roles}</th>
+                  <th className="additional">N/A</th>
+                  <th className="additional">N/A</th>
+                  <th>
+                    Edit<br />Remove
+                  </th>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
     )
+  }
+
+  return content
 }
 
 export default Users

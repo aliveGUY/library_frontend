@@ -28,11 +28,14 @@ const InfoBook = () => {
       <div>
         <h2 className="info">Info Book</h2>
         <Book book={book} disabled />
-        <p className="cont">Description:</p>
+        <p className="tit">Book title: </p> 
         <p className="desc">{title}</p>
+        <p className="cont">Description:</p>
         <p className="desc">{description}</p>
+        <p className="aut">Author: </p> 
         <p className="desc">{author}</p>
-        <p className="pri">{price}</p>
+        <p className="pric"> <span className="pri">Price:<span className="price">{price}</span></span></p>
+        
       </div>
     )
   }

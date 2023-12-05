@@ -1,7 +1,7 @@
 @import "./Colors.css";
 
 .accountDropDown,
-.login {
+.loginButton {
     position: relative;
     font-size: 1.3rem;
     display: flex;
@@ -69,7 +69,7 @@
 @media (min-width: 900px) {
 
     .accountDropDown,
-    .login {
+    .loginButton {
 
         font-size: 1rem;
     }

@@ -1,16 +1,15 @@
+import { selectCurrentUser } from '../app/api/authSlice'
 import { useSelector } from 'react-redux'
-import { selectCurrentToken } from '../app/api/authSlice'
-import { jwtDecode } from 'jwt-decode'
 
 const useAuth = () => {
-  const token = useSelector(selectCurrentToken)
-  let isCustomer = false
+  let isCustomer = true
   let isAdmin = false
-  let status = "Employee"
+  let status = "Customer"
 
-  if (token) {
-    const decoded = jwtDecode(token)
-    const { username, roles, id } = decoded.UserInfo
+  const user = useSelector(selectCurrentUser)
+
+  if (user) {
+    const { username, roles, id } = user
 
     isCustomer = roles.includes('Customer')
     isAdmin = roles.includes('Admin')
@@ -23,4 +22,5 @@ const useAuth = () => {
 
   return { username: '', roles: [], id: '', isCustomer, isAdmin, status }
 }
+
 export default useAuth

@@ -1,7 +1,7 @@
-import Book from "../components/Book"
 import { useGetBooksQuery } from "../app/api/booksSlice"
 import LoadingSpinner from "../components/LoadingSpinner"
 import Error from "../components/Error"
+import BooksMap from "../components/BooksMap"
 
 const Home = () => {
   const {
@@ -20,9 +20,7 @@ const Home = () => {
   if (isSuccess) {
     content = (
       <div className="Home">
-        <div className="books">
-          {Object.values(books.entities).map((book, index) => <Book book={book} key={index} />)}
-        </div>
+        <BooksMap books={books}/>
       </div>
     )
   }

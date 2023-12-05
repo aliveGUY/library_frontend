@@ -7,24 +7,23 @@ import PersistLogin from "./components/PersistLogin"
 import Layout from "./components/Layout"
 import Account from "./pages/Account"
 import AddNewBook from "./pages/AddNewBook"
-import Prefetch from "./components/Prefetch"
+import Registration from "./pages/Registration"
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route element={<PersistLogin />}>
-          <Route element={<Prefetch />}>
-            {/* Public Routes */}
-            <Route index element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/book/:id" element={<InfoBook />} />
+          {/* Public Routes */}
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/book/:id" element={<InfoBook />} />
 
-            {/* Should Be Protected */}
-            <Route path="/users" element={<Users />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/book/new" element={<AddNewBook />} />
-          </Route>
+          {/* Should Be Protected */}
+          <Route path="/users" element={<Users />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/book/new" element={<AddNewBook />} />
         </Route>
       </Route>
     </Routes>

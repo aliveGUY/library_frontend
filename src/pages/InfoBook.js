@@ -27,7 +27,7 @@ const InfoBook = () => {
     return (
       <div>
         <h2 className="info">Info Book</h2>
-        <Book book={book} disabled />
+        <div className="booky"><Book book={book} disabled /></div>
         <p className="tit">Book title: </p> 
         <p className="desc">{title}</p>
         <p className="cont">Description:</p>

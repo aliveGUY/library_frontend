@@ -29,6 +29,11 @@
   box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+.book:hover {
+  background-color: var(--green);
+  color: black;
+}
+
 .book .title {
   text-overflow: ellipsis;
   overflow: hidden;

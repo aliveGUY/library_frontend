@@ -1,8 +1,9 @@
-import Book from "../components/Book"
+import Book from "components/Book"
 import { useLocation } from "react-router-dom"
-import { useGetBookByIdQuery } from "../app/api/booksSlice"
-import LoadingSpinner from "../components/LoadingSpinner"
-import Error from "../components/Error"
+import { useGetBookByIdQuery } from "app/api/booksSlice"
+import LoadingSpinner from "components/LoadingSpinner"
+import Error from "components/Error"
+import Layout from '../components/Layout'
 
 const InfoBook = () => {
   const { pathname } = useLocation()
@@ -25,7 +26,7 @@ const InfoBook = () => {
     const book = data.entities[id]
     const { title, description, author, price } = book
     return (
-      <div>
+      <Layout title={`${title} — IMBook`} description={`description: ${description}`}>
         <h2 className="info">Info Book</h2>
         <Book book={book} disabled />
         <p className="cont">Description:</p>
@@ -33,7 +34,7 @@ const InfoBook = () => {
         <p className="desc">{description}</p>
         <p className="desc">{author}</p>
         <p className="pri">{price}</p>
-      </div>
+      </Layout>
     )
   }
 }

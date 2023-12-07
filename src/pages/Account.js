@@ -1,8 +1,9 @@
-import { useGetBooksByUserQuery } from "../app/api/booksSlice"
-import useAuth from "../hooks/useAuth"
-import LoadingSpinner from "../components/LoadingSpinner"
-import Error from "../components/Error"
-import Book from "../components/Book"
+import { useGetBooksByUserQuery } from "app/api/booksSlice"
+import useAuth from "hooks/useAuth"
+import LoadingSpinner from "components/LoadingSpinner"
+import Error from "components/Error"
+import Book from "components/Book"
+import Layout from '../components/Layout'
 
 const Account = () => {
   const { username, id, status } = useAuth()
@@ -21,7 +22,7 @@ const Account = () => {
 
   if (isSuccess) {
     content = (
-      <div>
+      <Layout>
         <h2>Account Info:</h2>
         <ul>
           <li>username: {username}</li>
@@ -34,7 +35,7 @@ const Account = () => {
             {Object.values(books.entities).map((book, index) => <Book book={book} key={index} />)}
           </div>
         </div>
-      </div>
+      </Layout>
     )
   }
 

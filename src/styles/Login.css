@@ -1,0 +1,26 @@
+@import "./Colors.css";
+
+.login-page {
+    background-color: var(--cream);
+}
+
+.login-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-image {
+    display: none;
+}
+
+
+@media (min-width: 1000px) {}
+
+@media (min-width: 1300px) {
+    .login-image {
+        display: block;
+        grid-column: 1/7;
+    }
+}

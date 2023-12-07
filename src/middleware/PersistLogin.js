@@ -1,9 +1,9 @@
 import { Link, Outlet } from 'react-router-dom'
 import usePersist from '../hooks/usePersist'
-import { useRefreshMutation } from "../app/api/authApiSlice"
+import { useRefreshMutation } from "app/api/authApiSlice"
 import { useEffect, useRef, useState } from 'react'
-import LoadingSpinner from './LoadingSpinner'
-import Error from './Error'
+import Error from '../components/Error'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const PersistLogin = () => {
   const [persist] = usePersist()
@@ -42,7 +42,7 @@ const PersistLogin = () => {
   } else if (isLoading) {
     content = <LoadingSpinner />
   } else if (isError) {
-    content = <Outlet />
+    content = <Error error={error} />
   } else if (isSuccess && trueSuccess || isUninitialized) {
     content = <Outlet />
   }

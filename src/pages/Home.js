@@ -47,7 +47,9 @@ const Home = () => {
             <img src={image} />
           </div>
         </Section>
-        <BooksMap books={books} />
+        <Section className="bookmap-section">
+          <BooksMap books={books} />
+        </Section>
       </Layout>
     )
   }

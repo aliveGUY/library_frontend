@@ -43,6 +43,12 @@
     margin-top: 1rem;
 }
 
+.bookmap-section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+    background-color: var(--cream);
+}
+
 @media (min-width: 1000px) {
     .home-heading .image-wrapper {
         grid-column: 9/17;

@@ -8,6 +8,7 @@
 @import "./Login.css";
 @import "./Components.css";
 @import "./Registration.css";
+@import "./Account.css";
 
 /* ---------{ Global Important Styles }--------- */
 * {
@@ -312,18 +313,13 @@ li {
 @media (min-width: 1900px) {}
 
 /* ---------{ Footer Styles }--------- */
-footer {
-  padding: 0 2rem;
-}
-
-footer .container {
-  border-radius: 40px 40px 0 0;
-  padding: 1.5rem;
+.footer-section {
+  background-color: var(--squid-ink);
   color: white;
-  background-color: var(--dark-green);
-  max-width: 1000px;
-  margin: 0 auto;
-  box-shadow: -2px 4px 15px rgba(0, 0, 0, 0.5);
+}
+footer {
+  padding:  2rem 0 3rem 0;
+  grid-column: 1/-1;
 }
 
 @media (min-width: 1000px) {}

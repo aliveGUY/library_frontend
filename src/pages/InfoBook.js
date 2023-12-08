@@ -1,9 +1,16 @@
-import Book from "components/Book"
 import { useLocation } from "react-router-dom"
 import { useGetBookByIdQuery } from "app/api/booksSlice"
 import LoadingSpinner from "components/LoadingSpinner"
 import Error from "components/Error"
 import Layout from '../components/Layout'
+import defaultCover from 'images/components/coverless-book.png'
+import Section from "components/Section"
+import Button from "components/Button"
+
+const DefaultCover = () => [
+  <img src={defaultCover} />,
+  <span className="no-cover-image">No Cover</span>
+]
 
 const InfoBook = () => {
   const { pathname } = useLocation()
@@ -27,13 +34,24 @@ const InfoBook = () => {
     const { title, description, author, price } = book
     return (
       <Layout title={`${title} — IMBook`} description={`description: ${description}`}>
-        <h2 className="info">Info Book</h2>
-        <Book book={book} disabled />
-        <p className="cont">Description:</p>
-        <p className="desc">{title}</p>
-        <p className="desc">{description}</p>
-        <p className="desc">{author}</p>
-        <p className="pri">{price}</p>
+        <Section className="book-info-section">
+          <div className="book-info-heading">
+            <h1>{title}</h1>
+            <p>by {author}</p>
+          </div>
+          <div className="cover-wrapper">
+            <div className="cover">
+              <DefaultCover />
+            </div>
+          </div>
+          <div className="book-info-body">
+            <p className="description">{description}</p>
+            <div className="cta">
+              <span className="cost">{price} UAH</span>
+              <Button theme="grullo">Add to cart</Button>
+            </div>
+          </div>
+        </Section>
       </Layout>
     )
   }

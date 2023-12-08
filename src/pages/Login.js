@@ -10,7 +10,7 @@ import { useTranslation, Trans } from "react-i18next"
 import Layout from 'components/Layout'
 import Section from "components/Section"
 import Button from "components/Button"
-import image from 'images/sections/hero-image.png'
+import image from 'images/sections/login-image.png'
 
 
 const Login = () => {
@@ -66,8 +66,10 @@ const Login = () => {
   const content = isLoading ? <LoadingSpinner /> : (
     <Layout className="login-page" title={title} description={description}>
       <Section className="login-section">
-        <div className="login-image">
-          <img src={image} />
+        <div className="login-image-wrapper">
+          <div className="login-image">
+            <img src={image} />
+          </div>
         </div>
         <div className="form-wrapper">
           <form className="auth-form" onSubmit={handleSubmit}>

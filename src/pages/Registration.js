@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { Trans, useTranslation } from "react-i18next"
 import Layout from "components/Layout"
 import Section from "components/Section"
-import image from 'images/sections/hero-image.png'
+import image from 'images/sections/registration-image.png'
 import Button from "components/Button"
 
 const Registration = () => {
@@ -53,9 +53,11 @@ const Registration = () => {
 
   return (
     <Layout className="register-page" title={title} description={description}>
-      <Section  className="register-section">
-      <div className="register-image">
-          <img src={image} />
+      <Section className="register-section">
+        <div className="register-image-wrapper">
+          <div className="register-image">
+            <img src={image} />
+          </div>
         </div>
         <div className="form-wrapper">
           <form className="auth-form" onSubmit={handleSubmit}>
@@ -86,7 +88,7 @@ const Registration = () => {
               required
             />
 
-            <Button  theme="marengo" disabled={!canSave}>
+            <Button theme="marengo" disabled={!canSave}>
               <Trans>Sign Up</Trans>
             </Button>
           </form>

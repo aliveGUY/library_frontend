@@ -68,7 +68,7 @@ const Login = () => {
       <Section className="login-section">
         <div className="login-image-wrapper">
           <div className="login-image">
-            <img src={image} />
+            <img src={image} alt="login image" />
           </div>
         </div>
         <div className="form-wrapper">
@@ -108,6 +108,7 @@ const Login = () => {
                 onChange={handleToggle}
                 checked={persist}
               />
+              &nbsp;
               <Trans>Trust This Device</Trans>
             </label>
 

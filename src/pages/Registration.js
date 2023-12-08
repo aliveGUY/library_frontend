@@ -56,7 +56,7 @@ const Registration = () => {
       <Section className="register-section">
         <div className="register-image-wrapper">
           <div className="register-image">
-            <img src={image} />
+            <img src={image} alt="register image" />
           </div>
         </div>
         <div className="form-wrapper">

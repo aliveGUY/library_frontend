@@ -117,7 +117,7 @@ const Navbar = () => {
   return (
     <Section className="navbar">
       <Link to="/" className="navbar-logo" >
-        <img src={logo} />
+        <img src={logo} alt="nav logo" />
       </Link>
       <nav className="navbar-burger" onClick={() => setDropDown(prev => !prev)}>
         <div className={`burger-${dropDown}`} />

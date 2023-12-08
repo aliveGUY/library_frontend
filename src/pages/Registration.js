@@ -69,6 +69,7 @@ const Registration = () => {
             </label>
             <input
               type="text"
+              data-testid="username"
               id="username"
               ref={userRef}
               value={username}
@@ -82,6 +83,7 @@ const Registration = () => {
             </label>
             <input
               type="password"
+              data-testid="password"
               id="password"
               onChange={handlePwdInput}
               value={password}

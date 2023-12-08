@@ -71,6 +71,7 @@ const AddNewBook = () => {
         <label htmlFor="title">Title:</label>
         <input
           name="title"
+          data-testid="title"
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
@@ -86,6 +87,7 @@ const AddNewBook = () => {
 
         <label htmlFor="description">Description:</label>
         <input
+          data-testid="description"
           name="description"
           type="text"
           onChange={(e) => setDescription(e.target.value)}
@@ -94,6 +96,7 @@ const AddNewBook = () => {
 
         <label htmlFor="price">Price:</label>
         <input
+          data-testid="price"
           name="price"
           type="text"
           onChange={(e) => setPrice(e.target.value)}

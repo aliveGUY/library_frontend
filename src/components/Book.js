@@ -3,8 +3,8 @@ import defaultImage from "images/components/coverless-book.png"
 import { Trans } from 'react-i18next'
 
 const DefaultCover = () => [
-  <img src={defaultImage} alt="default cover" />,
-  <span className="no-cover-image">
+  <img key="default-cover-img" src={defaultImage} alt="default cover" />,
+  <span key="default-cover-img-message" className="no-cover-image">
     <Trans>No Cover</Trans>
   </span>
 ]

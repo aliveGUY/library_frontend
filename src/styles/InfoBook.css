@@ -64,3 +64,34 @@
     }
 
 }
+
+.aut{
+    padding-top: 20px;
+    font-weight: bold;
+    font-style: italic;
+    font-size:  large;
+
+}
+
+.pric{
+    margin-left: 400px;
+    padding-top: 20px;
+    font-weight: bold;
+    font-style: italic;
+    font-size:  large;
+    
+}
+
+.price{
+    margin-left: 20px;
+    padding: 10px 10px 10px 10px;
+    border-style: solid dashed solid dashed;
+    border-color: #80ff80;
+}
+
+.price:hover{
+    background-color: brown;
+    border-color: greenyellow;
+    border-style: solid;
+
+}

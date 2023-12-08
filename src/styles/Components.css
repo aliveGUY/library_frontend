@@ -1,0 +1,68 @@
+.button {
+    cursor: pointer;
+    width: fit-content;
+    text-decoration: none;
+    padding: .3rem 1.5rem;
+    font-size: 1.5rem;
+    border: none;
+}
+
+.button-grullo {
+    color: white;
+    background-color: var(--grullo);
+}
+
+.button-marengo {
+    color: white;
+    background-color: var(--marengo);
+}
+
+.button:hover {
+    opacity: .8;
+}
+
+.button:active {
+    opacity: .5;
+}
+
+
+.form-wrapper {
+    display: flex;
+    grid-column: 2/-2;
+    height: 100%;
+}
+
+.form-wrapper .auth-form {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 3rem;
+    background-color: white;
+}
+
+.form-wrapper .auth-form input {
+    font-size: 1.3rem;
+    background-color: var(--cream);
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+}
+
+.form-wrapper .auth-form button {
+    margin: 0 auto;
+}
+
+
+
+@media (min-width: 1000px) {
+
+    
+}
+
+@media (min-width: 1300px) {
+    .form-wrapper {
+        grid-column: -8/-2;
+    }
+}

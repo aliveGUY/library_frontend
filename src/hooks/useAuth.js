@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 const useAuth = () => {
   let isCustomer = true
   let isAdmin = false
-  let status = "Customer"
+  let status = "Guest"
 
   const user = useSelector(selectCurrentUser)
 
@@ -20,7 +20,7 @@ const useAuth = () => {
     return { username, roles, id, status, isCustomer, isAdmin }
   }
 
-  return { username: '', roles: [], id: '', isCustomer, isAdmin, status }
+  return { username: '', roles: [], id: '', status, isCustomer, isAdmin }
 }
 
 export default useAuth

@@ -1,13 +1,22 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { useLoginMutation } from '../app/api/authApiSlice'
-import { setCredentials } from "../app/api/authSlice"
-import LoadingSpinner from "../components/LoadingSpinner"
-import Error from '../components/Error'
-import usePersist from "../hooks/usePersist"
+import { useLoginMutation } from 'app/api/authApiSlice'
+import { setCredentials } from "app/api/authSlice"
+import usePersist from "hooks/usePersist"
+import LoadingSpinner from "components/LoadingSpinner"
+import Error from 'components/Error'
+import { useTranslation, Trans } from "react-i18next"
+import Layout from 'components/Layout'
+import Section from "components/Section"
+import Button from "components/Button"
+import image from 'images/sections/login-image.png'
+
 
 const Login = () => {
+  const { t } = useTranslation()
+  const title = t("IMBook — Login")
+  const description = t("IMBook gives writers the opportunity to monetize their stories, find a publisher, and more. Join our community to realize all your ideas.")
   const userRef = useRef()
   const errRef = useRef()
   const [username, setUser] = useState('')
@@ -47,7 +56,6 @@ const Login = () => {
       } else {
         setErrMsg('Login Failed');
       }
-      errRef.current.focus();
     }
   }
 
@@ -56,49 +64,65 @@ const Login = () => {
   const handlePwdInput = (e) => setPwd(e.target.value)
 
   const content = isLoading ? <LoadingSpinner /> : (
-    <section >
-      <h2>Login</h2>
-      <Error error={errMsg} />
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          ref={userRef}
-          value={username}
-          onChange={handleUserInput}
-          autoComplete="off"
-          required
-        />
+    <Layout className="login-page" title={title} description={description}>
+      <Section className="login-section">
+        <div className="login-image-wrapper">
+          <div className="login-image">
+            <img src={image} />
+          </div>
+        </div>
+        <div className="form-wrapper">
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <h1>
+              <Trans>Sign in to your account</Trans>
+            </h1>
+            <Error error={errMsg} />
+            <label htmlFor="username">
+              <Trans>Username</Trans>
+            </label>
+            <input
+              type="text"
+              id="username"
+              ref={userRef}
+              value={username}
+              onChange={handleUserInput}
+              autoComplete="off"
+              required
+            />
 
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={handlePwdInput}
-          value={password}
-          required
-        />
+            <label htmlFor="password">
+              <Trans>Password</Trans>
+            </label>
+            <input
+              type="password"
+              id="password"
+              onChange={handlePwdInput}
+              value={password}
+              required
+            />
 
-        <label htmlFor="persist">
-          <input
-            type="checkbox"
-            id="persist"
-            onChange={handleToggle}
-            checked={persist}
-          />
-          Trust This Device
-        </label>
+            <label htmlFor="persist">
+              <input
+                type="checkbox"
+                id="persist"
+                onChange={handleToggle}
+                checked={persist}
+              />
+              <Trans>Trust This Device</Trans>
+            </label>
 
-        <button className="button">Sign In</button>
-      </form>
-      <div className="signupLink">
-        Need an account?&nbsp;
-        <b>
-          <a href="/registration">Registration</a>
-        </b>
-      </div>
-    </section>
+            <Button theme="marengo">
+              <Trans>Sign In</Trans>
+            </Button>
+            <div className="signupLink">
+              <b>
+                <Trans>Need an account? <a href="/registration">Registration</a></Trans>
+              </b>
+            </div>
+          </form>
+        </div>
+      </Section>
+    </Layout>
   )
 
   return content

@@ -1,19 +1,23 @@
-import { Outlet } from 'react-router-dom'
 import Navbar from "./Navbar"
 import Footer from "./Footer"
+import { Helmet } from 'react-helmet'
 
-const Layout = () => {
-  return (
-    <main className="App">
+const Layout = ({ title, description, className, children }) => {
+  return [
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>{title}</title>
+      <meta name="description" content={description}></meta>
+      <link ref="canonical" href={window.location.href} />
+    </Helmet>,
+    <div className={`App ${className}`}>
       <Navbar />
       <div className="pages-wrapper">
-        <div className="pages">
-          <Outlet />
-        </div>
+        {children}
       </div>
       <Footer />
-    </main>
-  )
+    </div>
+  ]
 }
 
 export default Layout

@@ -1,0 +1,30 @@
+@import "./Colors.css";
+
+.register-page {
+    background-color: var(--cream);
+}
+
+.register-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register-image-wrapper {
+    display: none;
+}
+
+@media (min-width: 1300px) {
+    .register-image-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        grid-column: 2/8;
+    }
+
+    .register-image-wrapper img {
+        border-radius: 25px;
+    }
+
+}

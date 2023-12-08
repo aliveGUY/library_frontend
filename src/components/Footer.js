@@ -1,18 +1,22 @@
+import Section from "./Section"
+
 const Footer = () => {
 
-    return (
-        <footer>
-            <div className="container">
-                <p>Цей сайт був створений як частина навчального курсу МНТУ</p>
-                Атори:
-                <ul>
-                    <li>Ілля</li>
-                    <li>Марія</li>
-                    <li>Макс</li>
-                </ul>
-            </div>
-        </footer>
-    )
+  return (
+    <Section className="footer-section">
+      <footer>
+        <div>
+          <p>Цей сайт був створений як частина навчального курсу МНТУ</p>
+          Атори:
+          <ul>
+            <li>Ілля</li>
+            <li>Марія</li>
+            <li>Макс</li>
+          </ul>
+        </div>
+      </footer>
+    </Section>
+  )
 }
 
 export default Footer

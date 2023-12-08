@@ -56,7 +56,7 @@ const Registration = () => {
       <Section className="register-section">
         <div className="register-image-wrapper">
           <div className="register-image">
-            <img src={image} />
+            <img src={image} alt="register image" />
           </div>
         </div>
         <div className="form-wrapper">
@@ -69,6 +69,7 @@ const Registration = () => {
             </label>
             <input
               type="text"
+              data-testid="username"
               id="username"
               ref={userRef}
               value={username}
@@ -82,6 +83,7 @@ const Registration = () => {
             </label>
             <input
               type="password"
+              data-testid="password"
               id="password"
               onChange={handlePwdInput}
               value={password}

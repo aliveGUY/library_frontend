@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import defaultImage from "images/components/coverless-book.png"
+import { Trans } from 'react-i18next'
 
 const DefaultCover = () => [
-  <img src={defaultImage} />,
-  <span className="no-cover-image">No Cover</span>
+  <img key="default-cover-img" src={defaultImage} alt="default cover" />,
+  <span key="default-cover-img-message" className="no-cover-image">
+    <Trans>No Cover</Trans>
+  </span>
 ]
 
 const Book = ({ book, disabled }) => {

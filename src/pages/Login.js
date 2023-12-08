@@ -18,7 +18,6 @@ const Login = () => {
   const title = t("IMBook — Login")
   const description = t("IMBook gives writers the opportunity to monetize their stories, find a publisher, and more. Join our community to realize all your ideas.")
   const userRef = useRef()
-  const errRef = useRef()
   const [username, setUser] = useState('')
   const [password, setPwd] = useState('')
   const [errMsg, setErrMsg] = useState('')
@@ -68,7 +67,7 @@ const Login = () => {
       <Section className="login-section">
         <div className="login-image-wrapper">
           <div className="login-image">
-            <img src={image} />
+            <img src={image} alt="login image" />
           </div>
         </div>
         <div className="form-wrapper">
@@ -82,6 +81,7 @@ const Login = () => {
             </label>
             <input
               type="text"
+              data-testid="username"
               id="username"
               ref={userRef}
               value={username}
@@ -95,6 +95,7 @@ const Login = () => {
             </label>
             <input
               type="password"
+              data-testid="password"
               id="password"
               onChange={handlePwdInput}
               value={password}
@@ -105,9 +106,11 @@ const Login = () => {
               <input
                 type="checkbox"
                 id="persist"
+                data-testid="persist"
                 onChange={handleToggle}
                 checked={persist}
               />
+              &nbsp;
               <Trans>Trust This Device</Trans>
             </label>
 

@@ -6,10 +6,13 @@ import Layout from '../components/Layout'
 import defaultCover from 'images/components/coverless-book.png'
 import Section from "components/Section"
 import Button from "components/Button"
+import { Trans } from 'react-i18next'
 
 const DefaultCover = () => [
-  <img src={defaultCover} />,
-  <span className="no-cover-image">No Cover</span>
+  <img src={defaultCover} alt="default cover" />,
+  <span className="no-cover-image">
+    <Trans>No Cover</Trans>
+  </span>
 ]
 
 const InfoBook = () => {
@@ -37,7 +40,9 @@ const InfoBook = () => {
         <Section className="book-info-section">
           <div className="book-info-heading">
             <h1>{title}</h1>
-            <p>by {author}</p>
+            <p>
+              <Trans>by {{ author }}</Trans>
+            </p>
           </div>
           <div className="cover-wrapper">
             <div className="cover">
@@ -47,8 +52,12 @@ const InfoBook = () => {
           <div className="book-info-body">
             <p className="description">{description}</p>
             <div className="cta">
-              <span className="cost">{price} UAH</span>
-              <Button theme="grullo">Add to cart</Button>
+              <span className="cost">
+                <Trans>{{ price }} UAH</Trans>
+              </span>
+              <Button theme="grullo">
+                <Trans>Add to cart</Trans>
+              </Button>
             </div>
           </div>
         </Section>

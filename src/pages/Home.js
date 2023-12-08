@@ -44,7 +44,7 @@ const Home = () => {
             </Button>
           </div>
           <div className="image-wrapper">
-            <img src={image} />
+            <img src={image} alt="hero image"/>
           </div>
         </Section>
         <Section className="bookmap-section">

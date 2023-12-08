@@ -1,15 +1,97 @@
-.info {
-    padding-bottom: 40px;
+.book-info-heading,
+.cover-wrapper,
+.book-info-body {
+    grid-column: 1/-1;
 }
 
-.cont {
+.book-info-section {
+    padding-top: 3em !important;
+    padding-bottom: 4rem !important;
+}
+
+.book-info-section .book-info-heading h1 {
+    font-size: 2rem;
+}
+
+.book-info-section .book-info-heading p {
+    font-size: 1.2rem;
+}
+
+.book-info-section .cover-wrapper .cover {
+    text-align: center;
+    min-height: 25rem;
+}
+
+.book-info-section .book-info-body .description {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.book-info-section .book-info-body .cost {
+    color: var(--green);
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.book-info-section .book-info-body .cta {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+@media (min-width: 1000px) {
+
+    .cover-wrapper {
+        grid-column: 1/8;
+        grid-row: 1/ span 2;
+    }
+
+    .book-info-heading,
+    .book-info-body {
+        grid-column: 8/-1;
+    }
+
+    .book-info-section .book-info-body .cta {
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .book-info-heading {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+}
+
+.aut{
     padding-top: 20px;
     font-weight: bold;
     font-style: italic;
+    font-size:  large;
+
 }
 
-.desc {
+.pric{
+    margin-left: 400px;
     padding-top: 20px;
-    padding-left: 40px;
+    font-weight: bold;
+    font-style: italic;
+    font-size:  large;
+    
+}
+
+.price{
+    margin-left: 20px;
+    padding: 10px 10px 10px 10px;
+    border-style: solid dashed solid dashed;
+    border-color: #80ff80;
+}
+
+.price:hover{
+    background-color: brown;
+    border-color: greenyellow;
+    border-style: solid;
 
 }

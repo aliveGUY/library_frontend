@@ -1,15 +1,32 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import LoadingSpinner from "./LoadingSpinner"
-import { useSendLogoutMutation } from "../app/api/authApiSlice"
+import { useSendLogoutMutation } from "app/api/authApiSlice"
 import Error from "./Error"
-import { useSelector } from "react-redux"
-import { selectCurrentUser } from "../app/api/authSlice"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
+import useAuth from "hooks/useAuth"
+import { useTranslation, Trans } from "react-i18next"
+import logo from '../images/logos/imbook-512x512.png'
+import Button from "./Button"
+import Section from './Section'
+
+const locales = {
+  ua: '🇺🇦 Ua',
+  en: '🇬🇧 En',
+}
+
+const onLangSwitch = e => {
+  if (e.target.children[0]?.classList.value.includes("options")) {
+    e.target.children[0].classList.toggle("show")
+  } else if (e.target.parentElement.parentElement.classList.contains("show")) {
+    e.target.parentElement.parentElement.classList.toggle("show")
+  }
+}
 
 const Navbar = () => {
-  const user = useSelector(selectCurrentUser)
+  const { i18n } = useTranslation()
+  const user = useAuth()
   const loggedIn = Boolean(user?.username)
   const navigate = useNavigate()
   const [dropDown, setDropDown] = useState(false)
@@ -29,62 +46,97 @@ const Navbar = () => {
 
   if (isError) return <Error error={error} />
 
-  const loginButton = (
-    <div className="loginButton" onClick={() => navigate('/login')}>
-      login
+  const LangSwitcher = (
+    <div className="lang-switcher" onClick={onLangSwitch}>
+      {locales[i18n.resolvedLanguage]}
+      <ul className="options">
+        {Object.keys(locales).map(locale => (
+          <li key={locale} className={`selected-${i18n.resolvedLanguage === locale}`}>
+            <button onClick={() => i18n.changeLanguage(locale)}>
+              {locales[locale]}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 
-  const logoutButton = (
-    <li onClick={sendLogout}>
-      Logout
-    </li>
+  const cartButton = (
+    <Button theme="grullo">
+      <Trans>Cart</Trans>
+    </Button>
   )
 
-  const userLink = (
-    <li onClick={() => navigate('/account')}>
-      Account Info
-    </li>
+  const loginButton = (
+    <Button theme="grullo" onClick={() => navigate('/login')}>
+      <Trans>Login</Trans>
+    </Button>
+  )
+
+  const logoutButton = (
+    <Button theme="grullo" onClick={sendLogout}>
+      <Trans>Logout</Trans>
+    </Button>
+  )
+
+  const accountButton = (
+    <Button theme="grullo" onClick={() => navigate('/account')}>
+      <Trans>Account Info</Trans>
+    </Button>
   )
 
   const AddNewBook = (
-    <li onClick={() => navigate('/book/new')}>
-      Add New Book
-    </li>
+    <Button theme="grullo" onClick={() => navigate('/book/new')}>
+      <Trans>Add New Book</Trans>
+    </Button>
   )
 
   const ManageUsers = (
-    <li onClick={() => navigate('/users')}>
-      Manage All Users
-    </li>
+    <Button theme="grullo" onClick={() => navigate('/users')}>
+      <Trans>Manage All Users</Trans>
+    </Button>
   )
 
-  const profileDrowDown = (
-    <button className={`accountDropDown ${dropDown}`} onClick={() => setDropDown(prev => !prev)}>
-      <span className="userIcon"><FontAwesomeIcon icon={faUser} /></span>
-      <span className="userName">{user?.username}</span>
-      <ul className="dropDown">
-        {userLink}
-        {AddNewBook}
-        {ManageUsers}
-        {logoutButton}
-      </ul>
-    </button>
+  const sessionButtons = [
+    accountButton,
+    AddNewBook,
+    user.isAdmin && ManageUsers,
+    logoutButton,
+  ]
+
+  const accountDropdown = (
+    <div className={`account-dropdown account-active-${dropDown}`} onClick={() => setDropDown(prev => !prev)}>
+      <FontAwesomeIcon icon={faUser} className="icon"/>
+      {user.username}
+      <div className={`options dropdown-${dropDown}`}>
+        {sessionButtons}
+      </div>
+    </div>
   )
 
   return (
-    <header>
-      <div className="container">
-        <Link to="/">
-          <h1 className="logo">IMBook</h1>
-        </Link>
-        <nav>
-          {loggedIn
-            ? profileDrowDown
-            : loginButton}
-        </nav>
+    <Section className="navbar">
+      <Link to="/" className="navbar-logo" >
+        <img src={logo} />
+      </Link>
+      <nav className="navbar-burger" onClick={() => setDropDown(prev => !prev)}>
+        <div className={`burger-${dropDown}`} />
+      </nav>
+      <div className={`burger-options-${dropDown}`}>
+        {cartButton}
+        {loggedIn
+          ? sessionButtons
+          : loginButton}
+        {LangSwitcher}
       </div>
-    </header>
+      <nav className="navbar-navigation">
+        {cartButton}
+        {loggedIn
+          ? accountDropdown
+          : loginButton}
+        {LangSwitcher}
+      </nav>
+    </Section>
   )
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import LoadingSpinner from "./LoadingSpinner"
 import { useSendLogoutMutation } from "app/api/authApiSlice"
@@ -48,7 +48,7 @@ const Navbar = () => {
 
   const LangSwitcher = (
     <div className="lang-switcher" onClick={onLangSwitch}>
-      {locales[i18n.resolvedLanguage]}
+      {locales[i18n.resolvedLanguage] || "locales broken"}
       <ul className="options">
         {Object.keys(locales).map(locale => (
           <li key={locale} className={`selected-${i18n.resolvedLanguage === locale}`}>
@@ -79,7 +79,7 @@ const Navbar = () => {
     </Button>
   )
 
-  const accountButton = (
+  const AccountButton = (
     <Button theme="grullo" onClick={() => navigate('/account')}>
       <Trans>Account Info</Trans>
     </Button>
@@ -98,11 +98,11 @@ const Navbar = () => {
   )
 
   const sessionButtons = [
-    accountButton,
-    AddNewBook,
-    user.isAdmin && ManageUsers,
-    logoutButton,
-  ]
+    <React.Fragment key="account">{AccountButton}</React.Fragment>,
+    <React.Fragment key="addNewBook">{AddNewBook}</React.Fragment>,
+    user.isAdmin && <React.Fragment key="manageUsers">{ManageUsers}</React.Fragment>,
+    <React.Fragment key="logout">{logoutButton}</React.Fragment>,
+  ];
 
   const accountDropdown = (
     <div className={`account-dropdown account-active-${dropDown}`} onClick={() => setDropDown(prev => !prev)}>

@@ -1,10 +1,10 @@
 @import "./Colors.css";
 
-.home-heading {
+.Home .home-heading {
     margin: 3rem 0;
 }
 
-.home-heading .image-wrapper {
+.Home .home-heading .image-wrapper {
     border-radius: 50%;
     width: fit-content;
     background-color: var(--squid-ink);
@@ -13,7 +13,7 @@
     grid-column: 1/-1;
 }
 
-.home-heading .text-column {
+.Home .home-heading .text-column {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
     grid-column: 2/-2;
 }
 
-.home-heading .text-column .badge {
+.Home .home-heading .text-column .badge {
     font-size: .9rem;
 
     background-color: var(--bone);
@@ -34,43 +34,71 @@
     color: var(--davys-gray);
 }
 
-.home-heading .text-column h1 {
+.Home .home-heading .text-column h1 {
     font-size: 2.5rem;
 }
 
-.home-heading .text-column .cta {
+.Home .home-heading .text-column .cta {
     margin: 0 auto;
     margin-top: 1rem;
 }
 
-.bookmap-section {
+.Home .booksearch-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    background-color: var(--squid-ink);
+    color: white;
+}
+
+.Home .booksearch-section h2 {
+    grid-column: 1/-1;
+    font-size: 1.2rem;
+}
+
+.Home .bookmap-section {
     padding-top: 4rem !important;
     padding-bottom: 4rem !important;
     background-color: var(--cream);
 }
 
+.Home .bookmap-section h2 {
+    grid-column: 1/-1;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.Home .bookmap-section h2 .colored {
+    color: var(--orange);
+}
+
 @media (min-width: 1000px) {
-    .home-heading .image-wrapper {
+    .Home .home-heading .image-wrapper {
         grid-column: 9/17;
         width: 100%;
         margin-right: 0;
         max-width: 400px;
     }
 
-
-    .home-heading .text-column {
+    .Home .home-heading .text-column {
         text-align: left;
         grid-column: 1/9;
         width: 100%;
         justify-content: center;
     }
 
-    .home-heading .text-column .badge {
+    .Home .home-heading .text-column .badge {
         margin: 0;
     }
 
-    .home-heading .text-column .cta {
+    .Home .home-heading .text-column .cta {
         margin-left: 0;
+    }
+
+    .Home .booksearch-section h2 {
+        grid-column: 2/-2;
+        font-size: 1.5rem;
+        text-align: center;
     }
 }
 

@@ -68,7 +68,20 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       }
     }),
 
-    addAddNewBook: builder.mutation({
+
+    searchBook: builder.mutation({
+      query: ({ query }) => ({
+        url: '/books/search',
+        method: 'POST',
+        body: { query },
+      }),
+      invalidatesTags: [
+        { type: 'Book', id: "LIST" }
+      ]
+    }),
+
+
+    addNewBook: builder.mutation({
       query: initialBook => ({
         url: '/books',
         method: 'POST',
@@ -112,7 +125,8 @@ export const {
   useGetBooksQuery,
   useGetBookByIdQuery,
   useGetBooksByUserQuery,
-  useAddAddNewBookMutation,
+  useAddNewBookMutation,
+  useSearchBookMutation,
   useUpdateBookMutation,
   useDeleteBookMutation,
 } = booksApiSlice

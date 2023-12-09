@@ -7,6 +7,7 @@ import Layout from "components/Layout"
 import Section from "components/Section"
 import image from 'images/sections/hero-image.png'
 import Button from "components/Button"
+import BookSearch from "components/BookSearch"
 
 const Home = () => {
   const { t } = useTranslation()
@@ -44,10 +45,19 @@ const Home = () => {
             </Button>
           </div>
           <div className="image-wrapper">
-            <img src={image} alt="hero image"/>
+            <img src={image} alt="hero image" />
           </div>
         </Section>
+        <Section className="booksearch-section">
+          <h2>
+            <Trans>Explore, read! Find books using our search bar that ignite your imagination.</Trans>
+          </h2>
+          <BookSearch />
+        </Section>
         <Section className="bookmap-section">
+          <h2>
+            <Trans>Reading Radar: Books on <span className="colored">the Rise</span></Trans>
+          </h2>
           <BooksMap books={books} />
         </Section>
       </Layout>

@@ -44,9 +44,9 @@
 
 .form-wrapper .auth-form input {
     font-size: 1.3rem;
-    background-color: var(--cream);
     padding: 1rem;
     border: none;
+    background-color: var(--cream);
     border-radius: 10px;
 }
 
@@ -54,17 +54,120 @@
     margin: 0 auto;
 }
 
+.book-search {
+    grid-column: 1/-1;
+}
 
+.book-search .input {
+    display: flex;
+}
+
+.book-search .input input {
+    flex: 1;
+    padding: .5rem;
+    border: none;
+}
+
+.book-search .serach-result {
+    color: black;
+    background-color: white;
+    overflow: hidden;
+    margin-top: 1rem;
+    border-radius: 15px;
+}
+
+.book-search .serach-result .result-item {
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.book-search .serach-result .result-item:hover {
+    background-color: rgb(224, 224, 224);
+    ;
+}
+
+.book-search .serach-result .result-item:active {
+    background-color: rgb(194, 194, 194);
+    ;
+}
+
+.book-search .serach-result .result-item:hover .title-author::after {
+    box-shadow: inset -105px 0px 43px -41px rgb(224, 224, 224);
+
+}
+
+.book-search .serach-result .result-item:active .title-author::after {
+    box-shadow: inset -105px 0px 43px -41px rgb(194, 194, 194);
+
+}
+
+.book-search .serach-result .result-item .title-author {
+    flex: 1;
+    text-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+}
+
+.book-search .serach-result .result-item .title-author h3 {
+    font-size: 1.5rem;
+}
+
+.book-search .serach-result .error {
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--red);
+}
+
+.book-search .serach-result .result-item .title-author::after {
+    box-shadow: inset -105px 0px 43px -41px white;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    content: "";
+}
+
+.book-search .serach-result .result-item .title-author p {
+    font-size: .8rem;
+}
+
+.book-search .serach-result .result-item .price {
+    font-size: 1.5rem;
+    color: var(--green);
+    font-weight: bold;
+}
 
 @media (min-width: 1000px) {
     .form-wrapper .auth-form {
         padding: 3rem;
     }
-    
+
+    .book-search {
+        grid-column: 3/-3;
+    }
+
+    .book-search .input input {
+        padding: .8rem;
+        font-size: 1.2rem;
+    }
+
+    .book-search .serach-result .result-item {
+        padding: 1rem;
+    }
+
+    .book-search .serach-result .result-item .title-author p {
+        font-size: 1rem;
+    }
 }
 
 @media (min-width: 1300px) {
     .form-wrapper {
         grid-column: -8/-2;
     }
+
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useAddAddNewBookMutation } from "app/api/booksSlice"
+import { useAddNewBookMutation } from "app/api/booksSlice"
 import { selectCurrentUser } from "app/api/authSlice"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -23,12 +23,12 @@ const AddNewBook = () => {
   const [author, setAuthor] = useState("")
   const [price, setPrice] = useState("")
 
-  const [addAddNewBook, {
+  const [addNewBook, {
     isLoading,
     isSuccess,
     isError,
     error
-  }] = useAddAddNewBookMutation()
+  }] = useAddNewBookMutation()
 
   useEffect(() => {
     if (isSuccess) {
@@ -59,7 +59,7 @@ const AddNewBook = () => {
     }
 
     if (canSave) {
-      await addAddNewBook(book)
+      await addNewBook(book)
     }
   }
 

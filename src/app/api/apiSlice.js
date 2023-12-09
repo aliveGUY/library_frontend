@@ -5,7 +5,7 @@ const modes = ['http://localhost:4000/', 'https://library-uni-project-api.onrend
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: modes[0],
+    baseUrl: process.env.NODE_ENV === 'production' ? modes[1] : modes[0],
     credentials: 'include'
 })
 

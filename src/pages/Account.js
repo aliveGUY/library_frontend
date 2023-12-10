@@ -55,22 +55,22 @@ const Account = () => {
   let booksList
   if (isBookListLoading) booksList = <LoadingSpinner />
   if (isBookListSuccess) booksList = <BooksMap books={books} />
-  if (isBookListError && bookListError.status === 404) {
+  if (isBookListError && (bookListError.status === 404 || bookListError.status === 401)) {
     booksList = (
       <div className="no-books-found">
         <h3>
           <Trans>No books were found</Trans>
         </h3>
-        <Button theme="grullo" href="/book/new">
-          <Trans>Create Your First Book</Trans>
-        </Button>
+        {isPermitted && (
+          <Button theme="grullo" href="/book/new">
+            <Trans>Create Your First Book</Trans>
+          </Button>
+        )}
       </div>
     )
   } else if (isBookListError) {
     booksList = <div>{bookListError.data.error}</div>
   }
-
-  console.log(bookListError)
 
   const title = `Account - IMBook`
   return (

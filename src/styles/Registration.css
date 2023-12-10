@@ -17,6 +17,13 @@
     display: none;
 }
 
+.register-section .error {
+    grid-column: 1/-1;
+    color: var(--red);
+    font-weight: bold;
+    text-align: center;
+}
+
 @media (min-width: 1300px) {
     .register-image-wrapper {
         display: flex;

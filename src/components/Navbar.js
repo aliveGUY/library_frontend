@@ -80,20 +80,20 @@ const Navbar = () => {
   )
 
   const AccountButton = (
-    <Button theme="grullo" onClick={() => navigate('/account')}>
-      <Trans>Account Info</Trans>
+    <Button theme="grullo" onClick={() => navigate(`/account/${user.id}`)}>
+      <Trans>Profile</Trans>
     </Button>
   )
 
   const AddNewBook = (
     <Button theme="grullo" onClick={() => navigate('/book/new')}>
-      <Trans>Add New Book</Trans>
+      <Trans>Create a Book</Trans>
     </Button>
   )
 
   const ManageUsers = (
     <Button theme="grullo" onClick={() => navigate('/users')}>
-      <Trans>Manage All Users</Trans>
+      <Trans>All Accounts</Trans>
     </Button>
   )
 

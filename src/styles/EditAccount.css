@@ -1,0 +1,166 @@
+.account-settings form {
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 2rem 2rem;
+}
+
+.account-settings label {
+    position: relative;
+    text-align: right;
+}
+
+.account-settings input,
+.account-settings textarea {
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+.account-settings .about-textarea {
+    resize: none;
+    min-height: 5rem;
+}
+
+.account-settings input[type="checkbox"] {
+    width: 2rem;
+}
+
+
+.account-settings input[type="file"] {
+    display: none;
+}
+
+.account-settings .avatar-wrapper {
+    grid-column: 1/-1;
+}
+
+.account-settings .error {
+    grid-column: 1/-1;
+    color: var(--red);
+    font-weight: bold;
+    text-align: center;
+}
+
+.account-settings .avatar {
+    position: relative;
+    cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
+    display: block;
+}
+
+.account-settings .avatar::after {
+    position: absolute;
+    content: attr(data-icon);
+    font-size: 2rem;
+    right: -.5rem;
+    transform: scaleX(-1);
+    bottom: 0;
+}
+
+.account-settings .avatar img {
+    max-width: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 1px solid black;
+}
+
+
+.account-settings label::after {
+    position: absolute;
+    content: attr(data-icon);
+    font-size: 1.5rem;
+    right: -1.3rem;
+    bottom: 0;
+    transform: scaleX(-1);
+}
+
+
+
+.account-settings fieldset {
+    border: none;
+}
+
+.account-settings .role-fields {
+    display: grid;
+    gap: 1.2rem .5rem;
+    grid-template-columns: auto 1fr;
+}
+
+.account-settings .role-fields label {
+    text-align: left;
+}
+
+
+.account-settings .password-fields {
+    display: flex;
+    gap: .5rem;
+    flex-direction: column;
+}
+
+
+.account-settings .password-fields label {
+    text-align: left;
+}
+
+.account-settings .password-fields button {
+    font-size: 1.2rem;
+}
+
+.account-settings .password-fields .toggle {
+    cursor: pointer;
+    width: fit-content;
+    background-color: var(--gray);
+    font-weight: bold;
+    font-size: 1rem;
+    color: gray;
+    padding: .5rem;
+}
+
+.account-settings .password-filed-active-true .toggle {
+    background-color: #F2F2F2;
+    font-weight: 400;
+    color: black;
+}
+
+.account-settings .password-filed-active-false input,
+.account-settings .password-filed-active-false label {
+    display: none;
+}
+
+.account-settings .password-filed-active-true input,
+.account-settings .password-filed-active-true label {
+    display: block;
+}
+
+.account-settings .submit-button {
+    grid-column: 1/-1;
+    margin: 0 auto;
+}
+
+.account-settings hr {
+    grid-column: 1/-1;
+    border: 1px black solid;
+}
+
+.account-settings .danger-zone {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    grid-column: 1/-1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem
+}
+
+
+@media (min-width: 1300px) {
+    .account-settings form {
+        grid-column: 4/-4;
+    }
+}

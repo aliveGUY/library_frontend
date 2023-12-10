@@ -11,6 +11,7 @@ import RolesControll from "./middleware/RolesControll"
 
 import { Suspense } from "react"
 import LoadingSpinner from "./components/LoadingSpinner"
+import EditAccount from "pages/EditAccount"
 
 function App() {
   return (
@@ -21,11 +22,13 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/book/:id" element={<InfoBook />} />
+        <Route path="/account/:id" element={<Account />} />
 
         {/* Protected Routes */}
         <Route element={<RolesControll allowedRole="Customer" />}>
-          <Route path="/account" element={<Account />} />
           <Route path="/book/new" element={<AddNewBook />} />
+          <Route path="/account/settings/:id" element={<EditAccount />} />
+
 
           <Route element={<RolesControll allowedRole="Admin" />}>
             <Route path="/users" element={<Users />} />

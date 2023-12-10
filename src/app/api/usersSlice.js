@@ -28,6 +28,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         } else return [{ type: 'User', id: 'LIST' }]
       }
     }),
+
+    getUserById: builder.query({
+      query: ({ id }) => `/users/${id}`,
+      invalidatesTags: [
+        { type: 'User', id: "LIST" }
+      ]
+    }),
+
     registerNewUser: builder.mutation({
       query: initialUser => ({
         url: '/users',
@@ -35,16 +43,32 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: {
           ...initialUser
         },
-        invalidatesTags: [
-          { type: 'User', id: "LIST" }
-        ]
-      })
+      }),
+      invalidatesTags: [
+        { type: 'User', id: "LIST" }
+      ]
     }),
     deleteUser: builder.mutation({
-      query:({id})=>({
+      query: ({ id }) => ({
         url: `/users/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: [
+        { type: 'User', id: "LIST" }
+      ]
+    }),
+
+    updateUser: builder.mutation({
+      query: initialUser => {
+        console.log(initialUser)
+        return {
+          url: `/users/${initialUser.id}`,
+          method: 'PATCH',
+          body: {
+            ...initialUser
+          },
+        }
+      },
       invalidatesTags: [
         { type: 'User', id: "LIST" }
       ]
@@ -54,8 +78,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetUsersQuery,
+  useGetUserByIdQuery,
   useRegisterNewUserMutation,
-  useDeleteUserMutation
+  useDeleteUserMutation,
+  useUpdateUserMutation
 } = usersApiSlice
 
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select()

@@ -4,6 +4,7 @@ import Error from "components/Error"
 import { useDeleteUserMutation } from "app/api/usersSlice"
 import { useTranslation, Trans } from "react-i18next"
 import Layout from "components/Layout"
+import Button from "components/Button"
 
 const Users = () => {
   const { t } = useTranslation()
@@ -69,9 +70,9 @@ const Users = () => {
                   <th>{isDeletionLoading
                     ? <LoadingSpinner />
                     : [
-                      <button key="edit-button" >
+                      <Button href={`/account/settings/${_id}`} key="edit-button" >
                         <Trans>Edit</Trans>
-                      </button>,
+                      </Button>,
                       <button key="delete-button" onClick={() => onUserDelete({ id: _id })} className="delete">
                         <Trans>Delete</Trans>
                       </button>

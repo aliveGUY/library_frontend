@@ -9,7 +9,7 @@ const useAuth = () => {
   const user = useSelector(selectCurrentUser)
 
   if (user) {
-    const { username, roles, id } = user
+    const { username, roles, id, avatar } = user
 
     isCustomer = roles.includes('Customer')
     isAdmin = roles.includes('Admin')
@@ -17,10 +17,10 @@ const useAuth = () => {
     if (isCustomer) status = "Customer"
     if (isAdmin) status = "Admin"
 
-    return { username, roles, id, status, isCustomer, isAdmin }
+    return { username, roles, id, avatar, status, isCustomer, isAdmin }
   }
 
-  return { username: '', roles: [], id: '', status, isCustomer, isAdmin }
+  return { username: '', roles: [], id: '', avatar: '', status, isCustomer, isAdmin }
 }
 
 export default useAuth

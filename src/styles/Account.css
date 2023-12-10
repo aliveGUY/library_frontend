@@ -23,7 +23,11 @@
 }
 
 .profile-photo img {
-    border-radius: 50%
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 1px solid black;
 }
 
 .profile-info {
@@ -32,6 +36,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.account-books-section .no-books-found {
+    text-align: center;
+    grid-column: 1/-1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 2rem;
+}
+
+.account-books-section .no-books-found h3{
+    color: gray;
 }
 
 @media (min-width: 1000px) {

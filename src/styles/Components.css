@@ -17,6 +17,16 @@
     background-color: var(--marengo);
 }
 
+.button-good {
+    color: white;
+    background-color: var(--green);
+}
+
+.button-danger {
+    color: white;
+    background-color: var(--red);
+}
+
 .button:hover {
     opacity: .8;
 }
@@ -42,13 +52,49 @@
     background-color: white;
 }
 
-.form-wrapper .auth-form input {
+.form-wrapper .auth-form input,
+.form-wrapper .auth-form textarea {
     font-size: 1.3rem;
     padding: 1rem;
     border: none;
     background-color: var(--cream);
     border-radius: 10px;
 }
+
+.form-wrapper .auth-form textarea {
+    resize: none;
+    min-height: 5rem;
+}
+
+.form-wrapper .auth-form input[type="file"] {
+    display: none;
+}
+
+.form-wrapper .auth-form .avatar {
+    position: relative;
+    cursor: pointer;
+    width: fit-content;
+    margin: 0 auto;
+    max-width: 8rem;
+}
+
+.form-wrapper .auth-form .avatar::after {
+    position: absolute;
+    content: attr(data-icon);
+    font-size: 2rem;
+    right: -.5rem;
+    transform: scaleX(-1);
+    bottom: 0;
+}
+
+.form-wrapper .auth-form .avatar img {
+    object-fit: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border: 1px solid black;
+}
+
 
 .form-wrapper .auth-form button {
     margin: 0 auto;

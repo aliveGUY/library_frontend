@@ -43,6 +43,31 @@
     margin-top: 1rem;
 }
 
+.Home .home-heading-loggedin {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background: var(--bone);
+}
+
+.Home .home-heading-loggedin .text-column {
+    margin: 0 auto;
+    grid-column: 1/-1;
+    align-items: center;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.Home .home-heading-loggedin .image-wrapper {
+    grid-column: 1/-1;
+    max-width: 20rem;
+    margin: 0 auto;
+    border-radius: 0 50% 50% 50%;
+    width: fit-content;
+    aspect-ratio: 1;
+    background: linear-gradient(-45deg, transparent 20%, var(--squid-ink) 90%);
+    overflow: hidden;
+}
+
 .Home .booksearch-section {
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -99,6 +124,25 @@
         grid-column: 2/-2;
         font-size: 1.5rem;
         text-align: center;
+    }
+
+    .Home .home-heading-loggedin {
+
+        background: linear-gradient(to left, white, var(--bone));
+    }
+
+    .Home .home-heading-loggedin .text-column {
+        margin: 0 auto;
+        grid-column: 5/-1;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .Home .home-heading-loggedin .image-wrapper {
+        grid-column: 1/5;
+        margin: 0 auto;
+        width: 100%;
     }
 }
 

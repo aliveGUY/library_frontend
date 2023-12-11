@@ -16,6 +16,10 @@
     font-size: 1.2rem;
 }
 
+.book-info-section .book-info-heading a {
+    font-size: .9rem;
+}
+
 .book-info-section .book-info-body .description {
     font-size: 1.5rem;
     margin-bottom: 1rem;

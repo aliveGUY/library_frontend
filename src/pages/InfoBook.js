@@ -49,7 +49,7 @@ const InfoBook = () => {
   if (isSuccess) {
     const book = data.entities[id]
     const isPermitted = authIndex === book.user || roles.includes("Admin")
-    const { title, description, author, price, cover } = book
+    const { title, description, author, price, cover, user } = book
     return (
       <Layout title={`${title} — IMBook`} description={`description: ${description}`}>
         <Section className="book-info-section">
@@ -68,6 +68,9 @@ const InfoBook = () => {
             <p>
               <Trans>by {{ author }}</Trans>
             </p>
+            <a href={`/account/${user}`}>
+              <Trans>View all the books belonging to this user</Trans>
+            </a>
           </div>
           <div className="cover-wrapper">
             <BookCover cover={cover} />

@@ -1,0 +1,8 @@
+.edit-book-section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+}
+
+.edit-book-section h1 {
+    grid-column: 1/-1;
+}

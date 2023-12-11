@@ -1,0 +1,9 @@
+.new-book-section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+}
+
+
+.new-book-section h1 {
+    grid-column: 1/-1;
+}

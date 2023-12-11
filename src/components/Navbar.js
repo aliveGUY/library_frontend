@@ -62,7 +62,7 @@ const Navbar = () => {
   )
 
   const cartButton = (
-    <Button theme="grullo">
+    <Button onClick={() => navigate('/cart')} theme="grullo">
       <Trans>Cart</Trans>
     </Button>
   )
@@ -106,7 +106,7 @@ const Navbar = () => {
 
   const accountDropdown = (
     <div className={`account-dropdown account-active-${dropDown}`} onClick={() => setDropDown(prev => !prev)}>
-      <FontAwesomeIcon icon={faUser} className="icon"/>
+      <FontAwesomeIcon icon={faUser} className="icon" />
       {user.username}
       <div className={`options dropdown-${dropDown}`}>
         {sessionButtons}

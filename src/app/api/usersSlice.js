@@ -59,16 +59,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
 
     updateUser: builder.mutation({
-      query: initialUser => {
-        console.log(initialUser)
-        return {
-          url: `/users/${initialUser.id}`,
-          method: 'PATCH',
-          body: {
-            ...initialUser
-          },
-        }
-      },
+      query: initialUser => ({
+        url: `/users/${initialUser.id}`,
+        method: 'PATCH',
+        body: {
+          ...initialUser
+        },
+      }),
       invalidatesTags: [
         { type: 'User', id: "LIST" }
       ]

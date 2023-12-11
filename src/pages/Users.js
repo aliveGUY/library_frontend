@@ -70,7 +70,7 @@ const Users = () => {
                   <th>{isDeletionLoading
                     ? <LoadingSpinner />
                     : [
-                      <Button href={`/account/settings/${_id}`} key="edit-button" >
+                      <Button href={`/account/edit/${_id}`} key="edit-button" >
                         <Trans>Edit</Trans>
                       </Button>,
                       <button key="delete-button" onClick={() => onUserDelete({ id: _id })} className="delete">

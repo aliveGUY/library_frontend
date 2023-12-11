@@ -188,6 +188,49 @@
     font-weight: bold;
 }
 
+.book-form {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 2rem 1rem;
+}
+
+.book-form .description {
+    resize: none;
+    min-height: 15rem;
+}
+
+.book-form input[type="file"] {
+    display: none;
+}
+
+.book-form .form-cover-wrapper {
+    cursor: pointer;
+    max-width: 20rem;
+    background-color: var(--gray);
+    grid-column: 1/-1;
+    aspect-ratio: 1;
+    width: fit-content;
+    display: flex;
+    margin: 0 auto;
+}
+
+.book-form .submit {
+    margin: 0 auto;
+    grid-column: 1/-1;
+}
+
+.book-form input,
+.book-form textarea {
+    font-size: 1rem;
+    padding: .5rem;
+}
+
+.book-form label {
+    text-align: right;
+}
+
 @media (min-width: 1000px) {
     .form-wrapper .auth-form {
         padding: 3rem;
@@ -216,4 +259,12 @@
         grid-column: -8/-2;
     }
 
+    .book-form {
+        grid-template-columns: auto 1fr 1fr;
+    }
+
+    .book-form .form-cover-wrapper {
+        grid-column-start: 3;
+        grid-row: 1/ span 4;
+    }
 }

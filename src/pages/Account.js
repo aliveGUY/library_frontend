@@ -15,7 +15,7 @@ const Account = () => {
 
   const queryIndex = pathname.match(regex)[1]
   const { id: authIndex, roles } = useAuth()
-  const isPermitted = Boolean(authIndex) || roles.includes("Admin")
+  const isPermitted = authIndex === queryIndex || roles.includes("Admin")
 
   const {
     data: user,
@@ -32,7 +32,7 @@ const Account = () => {
   } = useGetBooksByUserQuery({ id: queryIndex })
 
   const editButton = (
-    <Button theme="marengo" href={`/account/settings/${authIndex}`}>
+    <Button theme="marengo" href={`/account/edit/${authIndex}`}>
       <Trans>Edit</Trans>
     </Button>
   )

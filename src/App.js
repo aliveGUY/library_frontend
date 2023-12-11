@@ -8,6 +8,7 @@ import AddNewBook from "./pages/AddNewBook"
 import PersistLogin from "./middleware/PersistLogin"
 import Registration from "./pages/Registration"
 import RolesControll from "./middleware/RolesControll"
+import EditBook from "pages/EditBook"
 
 import { Suspense } from "react"
 import LoadingSpinner from "./components/LoadingSpinner"
@@ -27,7 +28,8 @@ function App() {
         {/* Protected Routes */}
         <Route element={<RolesControll allowedRole="Customer" />}>
           <Route path="/book/new" element={<AddNewBook />} />
-          <Route path="/account/settings/:id" element={<EditAccount />} />
+          <Route path="/book/edit/:id" element={<EditBook />} />
+          <Route path="/account/edit/:id" element={<EditAccount />} />
 
 
           <Route element={<RolesControll allowedRole="Admin" />}>

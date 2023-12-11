@@ -97,7 +97,7 @@ export const booksApiSlice = apiSlice.injectEndpoints({
 
     updateBook: builder.mutation({
       query: initialBook => ({
-        url: `/books/${initialBook._id}`,
+        url: `/books/${initialBook.id}`,
         method: 'PATCH',
         body: {
           ...initialBook

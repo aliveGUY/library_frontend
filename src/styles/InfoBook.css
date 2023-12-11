@@ -1,5 +1,4 @@
 .book-info-heading,
-.cover-wrapper,
 .book-info-body {
     grid-column: 1/-1;
 }
@@ -15,11 +14,6 @@
 
 .book-info-section .book-info-heading p {
     font-size: 1.2rem;
-}
-
-.book-info-section .cover-wrapper .cover {
-    text-align: center;
-    min-height: 25rem;
 }
 
 .book-info-section .book-info-body .description {
@@ -39,17 +33,26 @@
     justify-content: space-between;
 }
 
+.book-info-section .cover-wrapper {
+    grid-column: 1/-1;
+    max-width: 30rem;
+    margin: 0 auto;
+}
+
+.book-info-section .permited-actions {
+    grid-column: 1/-1;
+}
 
 @media (min-width: 1000px) {
-
-    .cover-wrapper {
-        grid-column: 1/8;
-        grid-row: 1/ span 2;
-    }
 
     .book-info-heading,
     .book-info-body {
         grid-column: 8/-1;
+    }
+
+    .book-info-section .cover-wrapper {
+        grid-column: 1/8;
+        grid-row: 1/ span 2;
     }
 
     .book-info-section .book-info-body .cta {

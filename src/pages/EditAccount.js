@@ -5,23 +5,24 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import convertToBase64 from "helpers/conertToBase64"
 import Button from "components/Button"
-import { useGetUserByIdQuery } from "app/api/usersSlice"
+import { useDeleteUserMutation, useGetUserByIdQuery } from "app/api/usersSlice"
 import { useUpdateUserMutation } from "app/api/usersSlice"
 import LoadingSpinner from "components/LoadingSpinner"
 import { useTranslation, Trans } from "react-i18next"
+import { useSendLogoutMutation } from "app/api/authApiSlice"
 
 const EditAccount = () => {
   const { t } = useTranslation()
   const title = t("Edit Account - IMBook")
   const { pathname } = useLocation()
-  const regex = /\/account\/settings\/([a-fA-F0-9]+)/
+  const regex = /\/account\/edit\/([a-fA-F0-9]+)/
   const id = pathname.match(regex)[1]
+  const navigate = useNavigate()
   const user = useAuth()
   const loggedIn = Boolean(user?.username)
   const isAdmin = Boolean(user?.roles.includes('Admin'))
-  const navigate = useNavigate()
 
-  if (!loggedIn || (id !== user.id && !isAdmin)) {
+  if (!loggedIn && (id !== user.id || !isAdmin)) {
     navigate('/')
   }
 
@@ -50,6 +51,16 @@ const EditAccount = () => {
     error: userUpdateError
   }] = useUpdateUserMutation()
 
+  const [sendLogout, {
+    isLoading: isLogoutLoading,
+    isSuccess: isLogoutSuccess,
+  }] = useSendLogoutMutation()
+
+  const [deleteUser, {
+    isLoading: isDeletionLoading
+  }] = useDeleteUserMutation()
+
+
 
 
   useEffect(() => {
@@ -72,15 +83,27 @@ const EditAccount = () => {
       navigate(-1)
     }
   }, [isUserUpdateSuccess])
-
+  
   useEffect(() => {
-    if (isUserUpdateError) {
-      if (userUpdateError.status === 409) {
-        setErrMsg(t("Username is already taken!"));
-      }
-    }
-  }, [isUserUpdateError]);
+    if (isLogoutSuccess) navigate('/')
+  }, [isLogoutSuccess, navigate])
 
+useEffect(() => {
+  if (isUserUpdateError) {
+    if (userUpdateError.status === 409) {
+      setErrMsg(t("Username is already taken!"));
+    }
+  }
+}, [isUserUpdateError]);
+
+
+  const onUserDelete = async e => {
+    const userConfirmation = window.confirm(t("Do you really want to delete your account?\n\nAll books associated with your account will be removed. This action cannot be undone. Are you sure you want to proceed?"))
+    if (userConfirmation) {
+      await deleteUser({ id })
+      await sendLogout()
+    }
+  }
 
   const handleUsernameChange = e => setUsrName(e.target.value)
   const handleAboutChange = e => setCurAbout(e.target.value)
@@ -143,14 +166,6 @@ const EditAccount = () => {
       await updateUser(user)
     } catch (err) {
       setErrMsg(err.message)
-    }
-  }
-
-  const onUserDelete = async e => {
-    const userConfirmation = window.confirm(t("Do you really want to delete your account?\n\nAll books associated with your account will be removed. This action cannot be undone. Are you sure you want to proceed?"))
-
-    if (userConfirmation) {
-      console.log("delete")
     }
   }
 
@@ -254,7 +269,7 @@ const EditAccount = () => {
   ]
 
   let form
-  if (isLoading || isUserUpdateLoading) form = <LoadingSpinner />
+  if (isLoading || isUserUpdateLoading || isLogoutLoading || isDeletionLoading) form = <LoadingSpinner />
   if (isSuccess) {
     form = [
       <form key="user-edit-form" onSubmit={onFormSubmit} onChange={() => setErrMsg('')}>

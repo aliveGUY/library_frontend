@@ -55,7 +55,7 @@ export const booksApiSlice = apiSlice.injectEndpoints({
         const loadedBooks = responseData.map(book => {
           book.id = book._id
           return book
-        })
+        }).reverse()
         return booksAdapter.setAll(initialState, loadedBooks)
       },
       providesTags: (result, error, arg) => {
@@ -108,16 +108,16 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       ]
     }),
 
-
     deleteBook: builder.mutation({
       query: ({ id }) => ({
         url: `/books/${id}`,
-        method: 'DELTE',
+        method: 'DELETE',
       }),
       invalidatesTags: [
-        { type: 'Book', id: "LIST" }
+        { type: 'User', id: "LIST" }
       ]
-    })
+    }),
+   
   })
 })
 

@@ -1,5 +1,6 @@
 import useAuth from "hooks/useAuth"
 import { useState } from "react"
+import { Trans } from "react-i18next"
 const priceRegex = /^\$?\d+(\.\d{1,2})?$/
 
 
@@ -65,7 +66,9 @@ const BookForm = ({ callback, book, id }) => {
         accept="image/*"
       />
 
-      <label htmlFor="title">Title</label>
+      <label htmlFor="title">
+        <Trans>Title</Trans>
+      </label>
       <input
         name="title"
         data-testid="title"
@@ -74,7 +77,9 @@ const BookForm = ({ callback, book, id }) => {
         value={title}
       />
 
-      <label htmlFor="author">Author</label>
+      <label htmlFor="author">
+        <Trans>Author</Trans>
+      </label>
       <input
         name="author"
         type="text"
@@ -82,7 +87,9 @@ const BookForm = ({ callback, book, id }) => {
         value={author}
       />
 
-      <label htmlFor="description">Description</label>
+      <label htmlFor="description">
+        <Trans>Description</Trans>
+      </label>
       <textarea
         data-testid="description"
         className="description"
@@ -92,7 +99,9 @@ const BookForm = ({ callback, book, id }) => {
         type="text"
       />
 
-      <label htmlFor="price">Price</label>
+      <label htmlFor="price">
+        <Trans>Price</Trans>
+      </label>
       <input
         data-testid="price"
         name="price"
@@ -100,7 +109,9 @@ const BookForm = ({ callback, book, id }) => {
         onChange={(e) => setPrice(e.target.value)}
         value={price}
       />
-      <Button theme="good" className="submit" type="submit">Submit</Button>
+      <Button theme="good" className="submit" type="submit">
+        <Trans>Submit</Trans>
+      </Button>
     </form>
   )
 }

@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import LoadingSpinner from "components/LoadingSpinner"
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
 import Layout from '../components/Layout'
 import Section from "components/Section"
 import BookForm from 'components/BookForm'
@@ -12,11 +12,14 @@ import useAuth from "hooks/useAuth"
 const EditBook = () => {
   const { t } = useTranslation()
   const page_title = t("IMBook — Edit Book")
+  const navigate = useNavigate()
 
   const { pathname } = useLocation()
   const regex = /\/book\/edit\/([a-fA-F0-9]+)/
   const id = pathname.match(regex)[1]
-  const { id: authIndex, roles } = useAuth()
+  const user = useAuth()
+  const loggedIn = Boolean(user?.username)
+  const isAdmin = Boolean(user?.roles.includes('Admin'))
 
   const {
     data: book,
@@ -26,7 +29,6 @@ const EditBook = () => {
     error
   } = useGetBookByIdQuery({ id })
 
-  const navigate = useNavigate()
 
   const [updateBook, {
     isLoading: isBookUpdateLoading,
@@ -37,23 +39,32 @@ const EditBook = () => {
 
   useEffect(() => {
     if (isBookUpdateSuccess) {
-      navigate('/')
+      navigate(-1)
     }
-  }, [isSuccess, navigate])
+  }, [isBookUpdateSuccess, navigate])
 
-  if (isError) {
-    console.log(error)
+  useEffect(() => {
+    if (isSuccess) {
+      if (!loggedIn && (book.user !== user.id || !isAdmin)) {
+        navigate('/')
+      }
+    }
+  }, [isSuccess])
+
+
+  if (isError || isBookUpdateError) {
+    console.log(error || bookUpdateError)
   }
 
-  let form
-
-  if (isLoading) form = <LoadingSpinner />
-  if (isSuccess) form = <BookForm callback={updateBook} id={id} book={book.entities[id]} />
+  if (isLoading || isBookUpdateLoading) return <LoadingSpinner />
 
   return (
     <Layout title={page_title}>
-      <Section>
-        {form}
+      <Section className="edit-book-section">
+        <h1>
+          <Trans>Edit a book</Trans>
+        </h1>
+        <BookForm callback={updateBook} id={id} book={book.entities[id]} />
       </Section>
     </Layout>
   )

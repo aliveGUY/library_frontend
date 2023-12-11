@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { useGetBookByIdQuery } from "app/api/booksSlice"
 import LoadingSpinner from "components/LoadingSpinner"
 import Error from "components/Error"
@@ -8,12 +8,15 @@ import Button from "components/Button"
 import { Trans } from 'react-i18next'
 import BookCover from "components/BookCover"
 import useAuth from "hooks/useAuth"
+import { useDeleteBookMutation } from "app/api/booksSlice"
+import { useEffect } from "react"
 
 const InfoBook = () => {
   const { pathname } = useLocation()
   const regex = /\/book\/([a-fA-F0-9]+)/
   const id = pathname.match(regex)[1]
   const { id: authIndex, roles } = useAuth()
+  const navigate = useNavigate()
 
   const {
     data,
@@ -23,9 +26,25 @@ const InfoBook = () => {
     error
   } = useGetBookByIdQuery({ id })
 
+  const [deleteBook, {
+    isLoading: isDeleteBookLoading,
+    isSuccess: isDeleteBookSuccess,
+  }] = useDeleteBookMutation()
+
+  useEffect(() => {
+    if (isDeleteBookSuccess) {
+      console.log('ss')
+      navigate('/')
+    }
+  }, [isDeleteBookSuccess, navigate])
+
+  const handleDeleteBook = async e => {
+    await deleteBook({ id })
+  }
+
   if (isError) return <Error error={error} />
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading || isDeleteBookLoading) return <LoadingSpinner />
 
   if (isSuccess) {
     const book = data.entities[id]
@@ -37,7 +56,10 @@ const InfoBook = () => {
           {isPermitted && (
             <div className="permited-actions">
               <Button theme="marengo" href={`/book/edit/${id}`}>
-                Edit Book
+                <Trans>Edit Book</Trans>
+              </Button>
+              <Button theme="danger" onClick={handleDeleteBook}>
+                <Trans>Delete Book</Trans>
               </Button>
             </div>
           )}
@@ -58,8 +80,8 @@ const InfoBook = () => {
               <Button theme="grullo">
                 <Trans>Add to cart</Trans>
               </Button>
-              <p className="description">{description}</p>
             </div>
+            <p className="description">{description}</p>
           </div>
         </Section>
       </Layout>

@@ -4,7 +4,6 @@ import Error from "components/Error"
 import { useDeleteUserMutation } from "app/api/usersSlice"
 import { useTranslation, Trans } from "react-i18next"
 import Layout from "components/Layout"
-import Button from "components/Button"
 
 const Users = () => {
   const { t } = useTranslation()
@@ -19,8 +18,6 @@ const Users = () => {
   } = useGetUsersQuery()
 
   const [deleteUser, { isLoading: isDeletionLoading }] = useDeleteUserMutation()
-
-
 
   let content
   if (isError) content = <Error error={error} />
@@ -63,16 +60,18 @@ const Users = () => {
               const { username, roles, _id } = user
               return (
                 <tr key={idx}>
-                  <th>{username}</th>
+                  <th>
+                    <a href={`/account/${_id}`}>{username}</a>
+                  </th>
                   <th>{roles}</th>
                   <th className="additional">N/A</th>
                   <th className="additional">N/A</th>
                   <th>{isDeletionLoading
                     ? <LoadingSpinner />
                     : [
-                      <Button href={`/account/edit/${_id}`} key="edit-button" >
+                      <a href={`/account/edit/${_id}`} key="edit-button" >
                         <Trans>Edit</Trans>
-                      </Button>,
+                      </a>,
                       <button key="delete-button" onClick={() => onUserDelete({ id: _id })} className="delete">
                         <Trans>Delete</Trans>
                       </button>

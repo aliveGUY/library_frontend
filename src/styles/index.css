@@ -10,6 +10,8 @@
 @import "./Registration.css";
 @import "./Account.css";
 @import "./EditAccount.css";
+@import "./AddNewBook.css";
+@import "./EditBook.css";
 
 /* ---------{ Global Important Styles }--------- */
 * {
@@ -260,6 +262,7 @@ li {
 .navbar-navigation .account-dropdown .dropdown-true {
   display: block;
 
+  z-index: 10;
 }
 
 .navbar-navigation .account-dropdown .options button {

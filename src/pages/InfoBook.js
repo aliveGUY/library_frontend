@@ -18,7 +18,7 @@ const InfoBook = () => {
   const id = pathname.match(regex)[1]
   const { id: authIndex, roles } = useAuth()
   const navigate = useNavigate()
-  const { addToCart } = useCart()
+  const { addToCart, cart } = useCart()
 
   const {
     data,
@@ -28,6 +28,8 @@ const InfoBook = () => {
     error
   } = useGetBookByIdQuery({ id })
 
+  const bookAlreadyInCart = data && cart.some(item => item._id === data._id)
+
   const [deleteBook, {
     isLoading: isDeleteBookLoading,
     isSuccess: isDeleteBookSuccess,
@@ -35,7 +37,6 @@ const InfoBook = () => {
 
   useEffect(() => {
     if (isDeleteBookSuccess) {
-      console.log('ss')
       navigate('/')
     }
   }, [isDeleteBookSuccess, navigate])
@@ -83,14 +84,26 @@ const InfoBook = () => {
               <span className="cost">
                 <Trans>{{ price }} UAH</Trans>
               </span>
-              <Button theme="grullo" onClick={() => addToCart({ book: data })}>
-                <Trans>Add to cart</Trans>
-              </Button>
+              {bookAlreadyInCart
+                ?
+                <div className="book-lready-in-cart">
+                  <span>
+                    <Trans>book already in cart</Trans>
+                  </span>
+                  <Button theme="grullo" onClick={() => addToCart({ book: data })}>
+                    <Trans>Add more</Trans>
+                  </Button>
+                </div>
+                :
+                <Button theme="good" onClick={() => addToCart({ book: data })}>
+                  <Trans>Add to cart</Trans>
+                </Button>
+              }
             </div>
             <p className="description">{description}</p>
           </div>
         </Section>
-      </Layout>
+      </Layout >
     )
   }
 }

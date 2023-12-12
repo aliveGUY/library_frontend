@@ -25,6 +25,8 @@
   "IMBook — Add New Book": "IMBook — Створити книгу",
   "IMBook gives writers the opportunity to monetize their stories, find a publisher, and more. Join our community to realize all your ideas.": "IMBook надає письменникам можливість монетизувати свої історії, знайти видавництво і не тільки. Доєднуйтесь до нашої спільноти щоб втілити всі свої ідеї.",
   "Create new book": "Створити нову книгу",
+  "Delete": "Видалити",
+  "Cart is empty": "Кошик порожній",
   "Edit Account - IMBook": "Редагувати Обліковий Запис - IMBook",
   "Username is already taken!": "Це ім'я користувача вже зайняте!",
   "Do you really want to delete your account?\n\nAll books associated with your account will be removed. This action cannot be undone. Are you sure you want to proceed?": "Ви дійсно хочете видалити свій обліковий запис?\n\nУсі книги, пов'язані з вашим обліковим записом, будуть видалені. Цю дію неможливо скасувати. Ви впевнені, що бажаєте продовжити?",
@@ -55,6 +57,8 @@
   "Edit Book": "Редагувати Книгу",
   "Delete Book": "Видалити Книгу",
   "View all the books belonging to this user": "Перегляньте всі книги цього користувача",
+  "book already in cart": "книга вже є в кошику",
+  "Add more": "Додати ще",
   "Add to cart": "Додати в кошик",
   "IMBook — Login": "IMBook — Вхід",
   "Sign in to your account": "Увійдіть у свій обліковий запис",
@@ -69,6 +73,5 @@
   "User": "Користувачі",
   "Cart Items": "Кошик",
   "Posted Book": "Книги",
-  "Actions": "Дії",
-  "Delete": "Видалити"
+  "Actions": "Дії"
 }

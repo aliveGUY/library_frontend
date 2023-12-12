@@ -25,6 +25,8 @@
   "IMBook — Add New Book": "IMBook — Add New Book",
   "IMBook gives writers the opportunity to monetize their stories, find a publisher, and more. Join our community to realize all your ideas.": "IMBook gives writers the opportunity to monetize their stories, find a publisher, and more. Join our community to realize all your ideas.",
   "Create new book": "Create new book",
+  "Delete": "Delete",
+  "Cart is empty": "Cart is empty",
   "Edit Account - IMBook": "",
   "Username is already taken!": "",
   "Do you really want to delete your account?\n\nAll books associated with your account will be removed. This action cannot be undone. Are you sure you want to proceed?": "",
@@ -55,6 +57,8 @@
   "Edit Book": "Edit Book",
   "Delete Book": "Delete Book",
   "View all the books belonging to this user": "View all the books belonging to this user",
+  "book already in cart": "book already in cart",
+  "Add more": "Add more",
   "Add to cart": "Add to cart",
   "IMBook — Login": "IMBook — Login",
   "Sign in to your account": "Sign in to your account",
@@ -69,6 +73,5 @@
   "User": "User",
   "Cart Items": "Cart Items",
   "Posted Book": "Posted Book",
-  "Actions": "Actions",
-  "Delete": "Delete"
+  "Actions": "Actions"
 }

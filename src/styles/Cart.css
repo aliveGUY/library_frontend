@@ -63,3 +63,10 @@
     font-weight: bold;
     font-size: 1.5rem;
 }
+
+.cart-section .books-list .empty-car-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: gray;
+    text-align: center;
+}

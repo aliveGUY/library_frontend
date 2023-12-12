@@ -10,6 +10,7 @@ import { useTranslation, Trans } from "react-i18next"
 import logo from '../images/logos/imbook-512x512.png'
 import Button from "./Button"
 import Section from './Section'
+import useCart from "hooks/useCart"
 
 const locales = {
   ua: '🇺🇦 Ua',
@@ -27,6 +28,7 @@ const onLangSwitch = e => {
 const Navbar = () => {
   const { i18n } = useTranslation()
   const user = useAuth()
+  const { cart } = useCart()
   const loggedIn = Boolean(user?.username)
   const navigate = useNavigate()
   const [dropDown, setDropDown] = useState(false)
@@ -62,8 +64,9 @@ const Navbar = () => {
   )
 
   const cartButton = (
-    <Button onClick={() => navigate('/cart')} theme="grullo">
+    <Button className="cart-button" onClick={() => navigate('/cart')} theme="grullo">
       <Trans>Cart</Trans>
+      {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
     </Button>
   )
 

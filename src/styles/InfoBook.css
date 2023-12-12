@@ -37,6 +37,11 @@
     justify-content: space-between;
 }
 
+.book-info-section .book-info-body .book-lready-in-cart {
+    display: flex;
+    flex-direction: column;
+}
+
 .book-info-section .cover-wrapper {
     grid-column: 1/-1;
     max-width: 30rem;

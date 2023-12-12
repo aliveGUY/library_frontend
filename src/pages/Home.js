@@ -60,35 +60,31 @@ const Home = () => {
     error
   } = useGetBooksQuery()
 
-  let content
+  let booksList
+  if (isError) booksList = <Error error={error} />
+  if (isLoading) booksList = <LoadingSpinner />
+  if (isSuccess) booksList = <BooksMap books={books} />
 
-  if (isError) content = <Error error={error} />
-  if (isLoading) content = <LoadingSpinner />
-
-  if (isSuccess) {
-    content = (
-      <Layout title={title} description={description} className="Home">
-        {loggedIn
-          ? <GreetingsHero name={user.username} />
-          : <CTAHero />
-        }
-        <Section className="booksearch-section">
-          <h2>
-            <Trans>Explore, read! Find books using our search bar that ignite your imagination.</Trans>
-          </h2>
-          <BookSearch />
-        </Section>
-        <Section className="bookmap-section">
-          <h2>
-            <Trans>Reading Radar: Books on <span className="colored">the Rise</span></Trans>
-          </h2>
-          <BooksMap books={books} />
-        </Section>
-      </Layout>
-    )
-  }
-
-  return content
+  return (
+    <Layout title={title} description={description} className="Home">
+      {loggedIn
+        ? <GreetingsHero name={user.username} />
+        : <CTAHero />
+      }
+      <Section className="booksearch-section">
+        <h2>
+          <Trans>Explore, read! Find books using our search bar that ignite your imagination.</Trans>
+        </h2>
+        <BookSearch />
+      </Section>
+      <Section className="bookmap-section">
+        <h2>
+          <Trans>Reading Radar: Books on <span className="colored">the Rise</span></Trans>
+        </h2>
+        {booksList}
+      </Section>
+    </Layout>
+  )
 }
 
 export default Home

@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { useGetBookByIdQuery } from "app/api/booksApiSlice"
 import LoadingSpinner from "components/LoadingSpinner"
-import Error from "components/Error"
 import Layout from '../components/Layout'
 import Section from "components/Section"
 import Button from "components/Button"
@@ -45,67 +44,81 @@ const InfoBook = () => {
     await deleteBook({ id })
   }
 
+  let permitedPanel
+  let bookInfo
 
-
-  if (isError) return <Error error={error} />
-
-  if (isLoading || isDeleteBookLoading) return <LoadingSpinner />
-
-  if (isSuccess) {
-    const { title, description, author, price, cover, user } = data
-    const isPermitted = authIndex === user || roles.includes("Admin")
-    return (
-      <Layout title={`${title} — IMBook`} description={`description: ${description}`}>
-        <Section className="book-info-section">
-          {isPermitted && (
-            <div className="permited-actions">
-              <Button theme="marengo" href={`/book/edit/${id}`}>
-                <Trans>Edit Book</Trans>
-              </Button>
-              <Button theme="danger" onClick={handleDeleteBook}>
-                <Trans>Delete Book</Trans>
-              </Button>
-            </div>
-          )}
-          <div className="book-info-heading">
-            <h1>{title}</h1>
-            <p>
-              <Trans>by {{ author }}</Trans>
-            </p>
-            <a href={`/account/${user}`}>
-              <Trans>View all the books belonging to this user</Trans>
-            </a>
-          </div>
-          <div className="cover-wrapper">
-            <BookCover cover={cover} />
-          </div>
-          <div className="book-info-body">
-            <div className="cta">
-              <span className="cost">
-                <Trans>{{ price }} UAH</Trans>
-              </span>
-              {bookAlreadyInCart
-                ?
-                <div className="book-lready-in-cart">
-                  <span>
-                    <Trans>book already in cart</Trans>
-                  </span>
-                  <Button theme="grullo" onClick={() => addToCart({ book: data })}>
-                    <Trans>Add more</Trans>
-                  </Button>
-                </div>
-                :
-                <Button theme="good" onClick={() => addToCart({ book: data })}>
-                  <Trans>Add to cart</Trans>
-                </Button>
-              }
-            </div>
-            <p className="description">{description}</p>
-          </div>
-        </Section>
-      </Layout >
+  if (isError) {
+    bookInfo = (
+      <div className="book-not-found">
+        <Trans>Book Not Found</Trans>
+      </div>
     )
   }
+
+  if (isLoading) bookInfo = <LoadingSpinner />
+  if (isDeleteBookLoading) permitedPanel = <LoadingSpinner />
+
+  if (isSuccess && data) {
+    const { title, description, author, price, cover, user } = data
+    const isPermitted = authIndex === user || roles.includes("Admin")
+    permitedPanel = isPermitted && (
+      <div className="permited-actions">
+        <Button theme="marengo" href={`/book/edit/${id}`}>
+          <Trans>Edit Book</Trans>
+        </Button>
+        <Button theme="danger" onClick={handleDeleteBook}>
+          <Trans>Delete Book</Trans>
+        </Button>
+      </div>
+    )
+
+    bookInfo = [
+      <div className="book-info-heading">
+        <h1>{title}</h1>
+        <p>
+          <Trans>by {{ author }}</Trans>
+        </p>
+        <a href={`/account/${user}`}>
+          <Trans>View all the books belonging to this user</Trans>
+        </a>
+      </div>,
+      <div className="cover-wrapper">
+        <BookCover cover={cover} />
+      </div>,
+      <div className="book-info-body">
+        <div className="cta">
+          <span className="cost">
+            <Trans>{{ price }} UAH</Trans>
+          </span>
+          {bookAlreadyInCart
+            ?
+            <div className="book-lready-in-cart">
+              <span>
+                <Trans>book already in cart</Trans>
+              </span>
+              <Button theme="grullo" onClick={() => addToCart({ book: data })}>
+                <Trans>Add more</Trans>
+              </Button>
+            </div>
+            :
+            <Button theme="good" onClick={() => addToCart({ book: data })}>
+              <Trans>Add to cart</Trans>
+            </Button>
+          }
+        </div>
+        <p className="description">{description}</p>
+      </div>
+    ]
+  }
+
+  return (
+    <Layout title={`${data?.title} — IMBook`} description={`description: ${data?.description}`}>
+      <Section className="book-info-section">
+        {permitedPanel}
+        {bookInfo}
+      </Section>
+    </Layout >
+  )
 }
 
 export default InfoBook

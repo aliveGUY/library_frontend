@@ -37,6 +37,10 @@
     justify-content: space-between;
 }
 
+.book-info-section .book-info-body .button-loader {
+    width: fit-content;
+}
+
 .book-info-section .book-info-body .book-lready-in-cart {
     display: flex;
     flex-direction: column;

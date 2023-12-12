@@ -5,11 +5,25 @@ import BookCover from "components/BookCover"
 import Button from "components/Button"
 import { Trans } from "react-i18next"
 import { useNavigate } from "react-router-dom"
+import useAuth from "hooks/useAuth"
+import { useUpdateCartMutation } from "app/api/cartApiSlice"
+import { useEffect } from "react"
+import LoadingSpinner from "components/LoadingSpinner"
 
 const Cart = () => {
   const { cart, removeFromCart } = useCart()
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0)
   const navigate = useNavigate()
+  const { id } = useAuth()
+  const isAuthed = Boolean(id)
+
+  const [updateCart, { isLoading }] = useUpdateCartMutation()
+
+  useEffect(() => {
+    if (isAuthed) {
+      updateCart({ cart, user: id })
+    }
+  }, [cart]);
 
   const list = cart.map(({ title, cover, author, _id, price }, idx) => (
     <div key={`book-${idx}`} className="list-item" >
@@ -28,9 +42,13 @@ const Cart = () => {
         <span className="price">
           <Trans>{{ price }} UAH</Trans>
         </span>
-        <Button theme="danger" onClick={() => removeFromCart({ id: _id })}>
-          <Trans>Delete</Trans>
-        </Button>
+        {isLoading || !isAuthed
+          ? <LoadingSpinner />
+          : <Button theme="danger" onClick={() => removeFromCart({ id: _id })}>
+            <Trans>Delete</Trans>
+          </Button>
+        }
+
       </div>
     </div>
   ))

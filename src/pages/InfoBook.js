@@ -10,6 +10,7 @@ import useAuth from "hooks/useAuth"
 import { useDeleteBookMutation } from "app/api/booksApiSlice"
 import { useEffect } from "react"
 import useCart from "hooks/useCart"
+import { useUpdateCartMutation } from "app/api/cartApiSlice"
 
 const InfoBook = () => {
   const { pathname } = useLocation()
@@ -18,7 +19,8 @@ const InfoBook = () => {
   const { id: authIndex, roles } = useAuth()
   const navigate = useNavigate()
   const { addToCart, cart } = useCart()
-
+  const isAuthed = Boolean(authIndex)
+  
   const {
     data,
     isLoading,
@@ -26,13 +28,24 @@ const InfoBook = () => {
     isError,
     error
   } = useGetBookByIdQuery({ id })
-
   const bookAlreadyInCart = data && cart.some(item => item._id === data._id)
+
+  const [updateCart, {
+    isLoading: isCartUpdateLoading,
+    isSuccess: isCartUpdateSuccess
+  }] = useUpdateCartMutation()
+
 
   const [deleteBook, {
     isLoading: isDeleteBookLoading,
     isSuccess: isDeleteBookSuccess,
   }] = useDeleteBookMutation()
+
+  useEffect(() => {
+    if (isAuthed) {
+      updateCart({ cart, user: id })
+    }
+  }, [cart]);
 
   useEffect(() => {
     if (isDeleteBookSuccess) {
@@ -46,6 +59,7 @@ const InfoBook = () => {
 
   let permitedPanel
   let bookInfo
+  let addBookToCart
 
   if (isError) {
     bookInfo = (
@@ -57,10 +71,31 @@ const InfoBook = () => {
 
   if (isLoading) bookInfo = <LoadingSpinner />
   if (isDeleteBookLoading) permitedPanel = <LoadingSpinner />
+  if (isCartUpdateLoading) addBookToCart = <span className="button-loader"><LoadingSpinner /></span>
+
+  if (isCartUpdateSuccess || !isAuthed) {
+    addBookToCart = bookAlreadyInCart
+      ?
+      <div className="book-lready-in-cart">
+        <span>
+          <Trans>book already in cart</Trans>
+        </span>
+        <Button theme="grullo" onClick={() => addToCart({ book: data })}>
+          <Trans>Add more</Trans>
+        </Button>
+      </div>
+      :
+      <Button theme="good" onClick={() => addToCart({ book: data })}>
+        <Trans>Add to cart</Trans>
+      </Button>
+  }
 
   if (isSuccess && data) {
     const { title, description, author, price, cover, user } = data
     const isPermitted = authIndex === user || roles.includes("Admin")
+
+
+
     permitedPanel = isPermitted && (
       <div className="permited-actions">
         <Button theme="marengo" href={`/book/edit/${id}`}>
@@ -90,20 +125,8 @@ const InfoBook = () => {
           <span className="cost">
             <Trans>{{ price }} UAH</Trans>
           </span>
-          {bookAlreadyInCart
-            ?
-            <div className="book-lready-in-cart">
-              <span>
-                <Trans>book already in cart</Trans>
-              </span>
-              <Button theme="grullo" onClick={() => addToCart({ book: data })}>
-                <Trans>Add more</Trans>
-              </Button>
-            </div>
-            :
-            <Button theme="good" onClick={() => addToCart({ book: data })}>
-              <Trans>Add to cart</Trans>
-            </Button>
+          {
+            addBookToCart
           }
         </div>
         <p className="description">{description}</p>

@@ -4,12 +4,17 @@ import { useRefreshMutation } from "app/api/authApiSlice"
 import { useEffect, useRef, useState } from 'react'
 import Error from '../components/Error'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { useGetCartMutation } from 'app/api/cartApiSlice'
+import { useDispatch } from 'react-redux'
+import { setCart } from 'app/api/cartSlice'
 
 const PersistLogin = () => {
   const [persist] = usePersist()
   const effectRan = useRef(false)
 
   const [trueSuccess, setTrueSuccess] = useState(false)
+  const [getCart] = useGetCartMutation()
+  const dispatch = useDispatch()
 
   const [refresh, {
     isUninitialized,
@@ -24,9 +29,10 @@ const PersistLogin = () => {
 
       const verufyRefreshTokeen = async () => {
         try {
-          await refresh()
+          const { data: { user } } = await refresh()
+          const { cart } = await getCart({ user: user.id }).unwrap()
+          dispatch(setCart({ cart }))
           setTrueSuccess(true)
-
         } catch (err) {
           console.log(err)
         }

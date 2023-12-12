@@ -1,4 +1,4 @@
-import { useGetBooksByUserQuery } from "app/api/booksSlice"
+import { useGetBooksByUserQuery } from "app/api/booksApiSlice"
 import useAuth from "hooks/useAuth"
 import LoadingSpinner from "components/LoadingSpinner"
 import Layout from '../components/Layout'
@@ -7,7 +7,7 @@ import Section from "components/Section"
 import Button from "components/Button"
 import { Trans } from "react-i18next"
 import { useLocation } from "react-router-dom"
-import { useGetUserByIdQuery } from "app/api/usersSlice"
+import { useGetUserByIdQuery } from "app/api/usersApiSlice"
 
 const Account = () => {
   const { pathname } = useLocation()

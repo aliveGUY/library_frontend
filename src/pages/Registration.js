@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { useRegisterNewUserMutation } from "app/api/usersSlice"
+import { useRegisterNewUserMutation } from "app/api/usersApiSlice"
 import LoadingSpinner from "components/LoadingSpinner"
 import { useNavigate } from "react-router-dom"
 import { Trans, useTranslation } from "react-i18next"

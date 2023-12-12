@@ -12,6 +12,7 @@
 @import "./EditAccount.css";
 @import "./AddNewBook.css";
 @import "./EditBook.css";
+@import "./Cart.css";
 
 /* ---------{ Global Important Styles }--------- */
 * {

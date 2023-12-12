@@ -11,6 +11,8 @@ import Layout from 'components/Layout'
 import Section from "components/Section"
 import Button from "components/Button"
 import image from 'images/sections/login-image.png'
+import { useGetCartMutation } from "app/api/cartApiSlice"
+import { setCart } from "app/api/cartSlice"
 
 
 const Login = () => {
@@ -25,6 +27,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   const [login, { isLoading }] = useLoginMutation()
+  const [getCart] = useGetCartMutation()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -41,16 +44,19 @@ const Login = () => {
     try {
       const { user } = await login({ username, password }).unwrap()
       dispatch(setCredentials({ user }))
+      const { cart } = await getCart({ user: user.id }).unwrap()
+      dispatch(setCart({ cart }))
       setUser('')
       setPwd('')
       navigate('/')
     } catch (err) {
-      if (!err?.originalStatus) {
+      console.log(err)
+      if (!err?.status) {
         // isLoading: true until timeout occurs
         setErrMsg('No Server Response');
-      } else if (err.originalStatus === 400) {
+      } else if (err.status === 400) {
         setErrMsg('Missing Username or Password');
-      } else if (err.originalStatus === 401) {
+      } else if (err.status === 401) {
         setErrMsg('Unauthorized');
       } else {
         setErrMsg('Login Failed');

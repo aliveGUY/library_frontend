@@ -1,6 +1,6 @@
 import { apiSlice } from "./apiSlice"
-import { logOut } from "./authSlice"
-import { setCredentials } from "./authSlice"
+import { logOut, setCredentials } from "./authSlice"
+import { clearCart } from "./cartSlice"
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
@@ -18,13 +18,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
-          //const { data } = 
-          await queryFulfilled
-          //console.log(data)
-          dispatch(logOut())
-          dispatch(apiSlice.util.resetApiState())
+          await queryFulfilled;  // Wait for the query to complete
+          dispatch(logOut());    // Dispatch logOut after the query is fulfilled
+          dispatch(clearCart());  // Now dispatch clearCart
+          dispatch(apiSlice.util.resetApiState());
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
       }
     }),

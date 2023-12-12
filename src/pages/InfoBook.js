@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom"
-import { useGetBookByIdQuery } from "app/api/booksSlice"
+import { useGetBookByIdQuery } from "app/api/booksApiSlice"
 import LoadingSpinner from "components/LoadingSpinner"
 import Error from "components/Error"
 import Layout from '../components/Layout'
@@ -8,8 +8,9 @@ import Button from "components/Button"
 import { Trans } from 'react-i18next'
 import BookCover from "components/BookCover"
 import useAuth from "hooks/useAuth"
-import { useDeleteBookMutation } from "app/api/booksSlice"
+import { useDeleteBookMutation } from "app/api/booksApiSlice"
 import { useEffect } from "react"
+import useCart from "hooks/useCart"
 
 const InfoBook = () => {
   const { pathname } = useLocation()
@@ -17,6 +18,7 @@ const InfoBook = () => {
   const id = pathname.match(regex)[1]
   const { id: authIndex, roles } = useAuth()
   const navigate = useNavigate()
+  const { addToCart } = useCart()
 
   const {
     data,
@@ -42,14 +44,15 @@ const InfoBook = () => {
     await deleteBook({ id })
   }
 
+
+
   if (isError) return <Error error={error} />
 
   if (isLoading || isDeleteBookLoading) return <LoadingSpinner />
 
   if (isSuccess) {
-    const book = data.entities[id]
-    const isPermitted = authIndex === book.user || roles.includes("Admin")
-    const { title, description, author, price, cover, user } = book
+    const { title, description, author, price, cover, user } = data
+    const isPermitted = authIndex === user || roles.includes("Admin")
     return (
       <Layout title={`${title} — IMBook`} description={`description: ${description}`}>
         <Section className="book-info-section">
@@ -80,7 +83,7 @@ const InfoBook = () => {
               <span className="cost">
                 <Trans>{{ price }} UAH</Trans>
               </span>
-              <Button theme="grullo">
+              <Button theme="grullo" onClick={() => addToCart({ book: data })}>
                 <Trans>Add to cart</Trans>
               </Button>
             </div>

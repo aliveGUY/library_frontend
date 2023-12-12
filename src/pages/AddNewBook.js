@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useAddNewBookMutation } from "app/api/booksSlice"
+import { useAddNewBookMutation } from "app/api/booksApiSlice"
 import { useNavigate } from "react-router-dom"
 import LoadingSpinner from "components/LoadingSpinner"
 import { Trans, useTranslation } from "react-i18next"

@@ -12,13 +12,6 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError
       },
-      transformResponse: responseData => {
-        const loadedBooks = responseData.map(book => {
-          book.id = book._id
-          return book
-        })
-        return booksAdapter.setAll(initialState, loadedBooks)
-      },
       providesTags: (result, error, arg) => {
         if (result?.ids) {
           return [
@@ -35,12 +28,6 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError
       },
-      transformResponse: responseData => {
-        const { _id: id, ...rest } = responseData
-        const loadedBook = { id, ...rest }
-
-        return booksAdapter.setOne(initialState, loadedBook)
-      },
       invalidatesTags: [
         { type: 'Book', id: "LIST" }
       ]
@@ -50,13 +37,6 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       query: ({ id }) => `/books/added-by/${id}`,
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError
-      },
-      transformResponse: responseData => {
-        const loadedBooks = responseData.map(book => {
-          book.id = book._id
-          return book
-        }).reverse()
-        return booksAdapter.setAll(initialState, loadedBooks)
       },
       providesTags: (result, error, arg) => {
         if (result?.ids) {

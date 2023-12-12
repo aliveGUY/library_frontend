@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Button from "./Button"
-import { useSearchBookMutation } from "app/api/booksSlice"
+import { useSearchBookMutation } from "app/api/booksApiSlice"
 import LoadingSpinner from "./LoadingSpinner"
 import { useNavigate } from "react-router-dom"
 import { Trans } from "react-i18next"

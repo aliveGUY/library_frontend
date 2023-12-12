@@ -1,4 +1,4 @@
-import { useGetBooksQuery } from "app/api/booksSlice"
+import { useGetBooksQuery } from "app/api/booksApiSlice"
 import LoadingSpinner from "components/LoadingSpinner"
 import Error from "components/Error"
 import BooksMap from "components/BooksMap"

@@ -5,8 +5,8 @@ import { Trans, useTranslation } from "react-i18next"
 import Layout from '../components/Layout'
 import Section from "components/Section"
 import BookForm from 'components/BookForm'
-import { useUpdateBookMutation } from "app/api/booksSlice"
-import { useGetBookByIdQuery } from "app/api/booksSlice"
+import { useUpdateBookMutation } from "app/api/booksApiSlice"
+import { useGetBookByIdQuery } from "app/api/booksApiSlice"
 import useAuth from "hooks/useAuth"
 
 const EditBook = () => {
@@ -64,7 +64,7 @@ const EditBook = () => {
         <h1>
           <Trans>Edit a book</Trans>
         </h1>
-        <BookForm callback={updateBook} id={id} book={book.entities[id]} />
+        <BookForm callback={updateBook} id={id} book={book} />
       </Section>
     </Layout>
   )

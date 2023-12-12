@@ -1,7 +1,7 @@
 import LoadingSpinner from "components/LoadingSpinner"
-import { useGetUsersQuery } from "app/api/usersSlice"
+import { useGetUsersQuery } from "app/api/usersApiSlice"
 import Error from "components/Error"
-import { useDeleteUserMutation } from "app/api/usersSlice"
+import { useDeleteUserMutation } from "app/api/usersApiSlice"
 import { useTranslation, Trans } from "react-i18next"
 import Layout from "components/Layout"
 

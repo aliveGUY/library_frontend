@@ -11,7 +11,10 @@ import useAuth from "./useAuth"
 const useCart = () => {
   const dispatch = useDispatch()
   const cart = useSelector(selectCurrentCart)
-  const [updateCart] = useUpdateCartMutation()
+  const [updateCart, {
+    isLoading,
+    isSuccess
+  }] = useUpdateCartMutation()
   const { id } = useAuth()
   const isAuthed = Boolean(id)
 
@@ -29,7 +32,7 @@ const useCart = () => {
     }
   }, [cart]);
 
-  return { addToCart, removeFromCart, cart }
+  return { addToCart, removeFromCart, cart, isLoading, isSuccess }
 }
 
 export default useCart

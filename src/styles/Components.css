@@ -52,6 +52,12 @@
     background-color: white;
 }
 
+.global-loading-message{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .form-wrapper .auth-form input,
 .form-wrapper .auth-form textarea {
     font-size: 1.3rem;

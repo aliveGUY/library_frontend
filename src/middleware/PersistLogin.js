@@ -7,13 +7,14 @@ import LoadingSpinner from '../components/LoadingSpinner'
 import { useGetCartMutation } from 'app/api/cartApiSlice'
 import { useDispatch } from 'react-redux'
 import { setCart } from 'app/api/cartSlice'
+import { Trans } from 'react-i18next'
 
 const PersistLogin = () => {
   const [persist] = usePersist()
   const effectRan = useRef(false)
 
   const [trueSuccess, setTrueSuccess] = useState(false)
-  const [getCart] = useGetCartMutation()
+  const [getCart, { isLoading: isGetCartLoading }] = useGetCartMutation()
   const dispatch = useDispatch()
 
   const [refresh, {
@@ -46,8 +47,23 @@ const PersistLogin = () => {
   if (!persist) {
     content = <Outlet />
   } else if (isLoading) {
-    content = <LoadingSpinner />
-  } else if (isError) {
+
+    content = (
+      <div className="global-loading-message">
+        <LoadingSpinner />
+        <Trans>Loading your account</Trans>
+      </div>
+    )
+
+  } else if (isGetCartLoading) {
+    content = (
+      <div className="global-loading-message">
+        <LoadingSpinner />
+        <Trans>Loading your cart</Trans>
+      </div>
+    )
+  }
+  else if (isError) {
     content = <Error error={error} />
   } else if (isSuccess && trueSuccess || isUninitialized) {
     content = <Outlet />

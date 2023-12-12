@@ -5,9 +5,9 @@ import BookCover from "components/BookCover"
 import Button from "components/Button"
 import { Trans } from "react-i18next"
 import { useNavigate } from "react-router-dom"
-import LoadingSpinner from "components/LoadingSpinner"
+
 const Cart = () => {
-  const { cart, isLoading, isSuccess, removeFromCart } = useCart()
+  const { cart, removeFromCart } = useCart()
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0)
   const navigate = useNavigate()
 
@@ -35,11 +35,6 @@ const Cart = () => {
     </div>
   ))
 
-
-  var itemList
-  if (isLoading) itemList = <LoadingSpinner />
-  if (isSuccess) itemList = list
-
   return (
     <Layout>
       <Section className="cart-section">
@@ -49,7 +44,7 @@ const Cart = () => {
         <div className="books-list">
           {
             cart.length > 0
-              ? itemList
+              ? list
               : <span className="empty-car-message">
                 <Trans>Cart is empty</Trans>
               </span>

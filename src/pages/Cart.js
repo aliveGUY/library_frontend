@@ -7,6 +7,7 @@ import { Trans } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 const Cart = () => {
   const { cart, removeFromCart } = useCart()
+  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0)
   const navigate = useNavigate()
 
   const list = cart.map(({ title, cover, author, _id, price }, idx) => (
@@ -48,6 +49,12 @@ const Cart = () => {
                 <Trans>Cart is empty</Trans>
               </span>
           }
+        </div>
+        <div className="total-price">
+          <div>
+            <Trans>Total price: <span className="price">{{ totalPrice }} UAH</span></Trans>
+          </div>
+          <Button theme="good">Proceed to Purchase</Button>
         </div>
       </Section>
     </Layout>

@@ -15,14 +15,13 @@ const EditAccount = () => {
   const { t } = useTranslation()
   const title = t("Edit Account - IMBook")
   const { pathname } = useLocation()
-  const regex = /\/account\/edit\/([a-fA-F0-9]+)/
-  const id = pathname.match(regex)[1]
+  const id = pathname.split('/').pop()
   const navigate = useNavigate()
   const user = useAuth()
   const loggedIn = Boolean(user?.username)
   const isAdmin = Boolean(user?.roles.includes('Admin'))
 
-  if (!loggedIn && (id !== user.id || !isAdmin)) {
+  if (!loggedIn || (id !== user.id || !isAdmin)) {
     navigate('/')
   }
 

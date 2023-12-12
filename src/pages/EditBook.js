@@ -15,11 +15,11 @@ const EditBook = () => {
   const navigate = useNavigate()
 
   const { pathname } = useLocation()
-  const regex = /\/book\/edit\/([a-fA-F0-9]+)/
-  const id = pathname.match(regex)[1]
+  const id = pathname.split('/').pop()
   const user = useAuth()
   const loggedIn = Boolean(user?.username)
   const isAdmin = Boolean(user?.roles.includes('Admin'))
+
 
   const {
     data: book,
@@ -29,6 +29,9 @@ const EditBook = () => {
     error
   } = useGetBookByIdQuery({ id })
 
+  if (!loggedIn || (book?.user !== user.id || !isAdmin)) {
+    navigate('/')
+  }
 
   const [updateBook, {
     isLoading: isBookUpdateLoading,
@@ -42,15 +45,6 @@ const EditBook = () => {
       navigate(-1)
     }
   }, [isBookUpdateSuccess, navigate])
-
-  useEffect(() => {
-    if (isSuccess) {
-      if (!loggedIn && (book.user !== user.id || !isAdmin)) {
-        navigate('/')
-      }
-    }
-  }, [isSuccess])
-
 
   if (isError || isBookUpdateError) {
     console.log(error || bookUpdateError)

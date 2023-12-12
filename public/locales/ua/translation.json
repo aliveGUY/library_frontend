@@ -27,6 +27,8 @@
   "Create new book": "Створити нову книгу",
   "Delete": "Видалити",
   "Cart is empty": "Кошик порожній",
+  "Total price: <1>{{totalPrice}} UAH</1>": "Згальна вартість <1>{{totalPrice}} ГРН</1>",
+  "Proceed to Purchase": "Перейти до покупки",
   "Edit Account - IMBook": "Редагувати Обліковий Запис - IMBook",
   "Username is already taken!": "Це ім'я користувача вже зайняте!",
   "Do you really want to delete your account?\n\nAll books associated with your account will be removed. This action cannot be undone. Are you sure you want to proceed?": "Ви дійсно хочете видалити свій обліковий запис?\n\nУсі книги, пов'язані з вашим обліковим записом, будуть видалені. Цю дію неможливо скасувати. Ви впевнені, що бажаєте продовжити?",

@@ -27,6 +27,8 @@
   "Create new book": "Create new book",
   "Delete": "Delete",
   "Cart is empty": "Cart is empty",
+  "Total price: <1>{{totalPrice}} UAH</1>": "Total price: <1>{{totalPrice}} UAH</1>",
+  "Proceed to Purchase": "Proceed to Purchase",
   "Edit Account - IMBook": "",
   "Username is already taken!": "",
   "Do you really want to delete your account?\n\nAll books associated with your account will be removed. This action cannot be undone. Are you sure you want to proceed?": "",

@@ -54,7 +54,9 @@ const Cart = () => {
           <div>
             <Trans>Total price: <span className="price">{{ totalPrice }} UAH</span></Trans>
           </div>
-          <Button theme="good">Proceed to Purchase</Button>
+          <Button theme="good">
+            <Trans>Proceed to Purchase</Trans>
+          </Button>
         </div>
       </Section>
     </Layout>

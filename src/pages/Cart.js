@@ -4,9 +4,11 @@ import useCart from "hooks/useCart"
 import BookCover from "components/BookCover"
 import Button from "components/Button"
 import { Trans } from "react-i18next"
+import { useNavigate } from "react-router-dom"
 
 const Cart = () => {
   const { cart, removeFromCart } = useCart()
+  const navigate = useNavigate()
 
   return (
     <Layout>
@@ -15,9 +17,9 @@ const Cart = () => {
           <Trans>Cart</Trans>
         </h1>
         <div className="books-list">
-          {cart.map(({ title, cover, author, id, _id, price }, idx) => (
-            <div key={`book-${idx}`} className="list-item">
-              <div className="item-info">
+          {cart.map(({ title, cover, author, _id, price }, idx) => (
+            <div key={`book-${idx}`} className="list-item" >
+              <div className="item-info" onClick={() => navigate(`/book/${_id}`)}>
                 <div className="cover">
                   <BookCover cover={cover} />
                 </div>

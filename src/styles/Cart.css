@@ -15,7 +15,12 @@
     grid-template-columns: 1fr auto;
 }
 
+.cart-section .books-list .list-item .item-info:hover {
+    background-color: var(--gray);
+}
+
 .cart-section .books-list .list-item .item-info {
+    cursor: pointer;
     display: flex;
     gap: 1rem;
     position: relative;
@@ -33,6 +38,10 @@
     content: "";
 }
 
+.cart-section .books-list .list-item .item-info:hover::after {
+    box-shadow: inset -70px 0px 43px -41px var(--gray);
+}
+
 .cart-section .books-list .list-item .item-info .text {
     overflow: hidden;
     text-wrap: nowrap;
@@ -41,6 +50,11 @@
 
 .cart-section .books-list .list-item .item-info .cover {
     max-width: 5rem;
+}
+
+.cart-section .books-list .list-item .item-price-delete {
+    align-items: center;
+    display: flex;
 }
 
 .cart-section .books-list .list-item .item-price-delete .price {

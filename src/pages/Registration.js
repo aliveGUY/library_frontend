@@ -92,7 +92,7 @@ const Registration = () => {
       <Section className="register-section">
         <div className="register-image-wrapper">
           <div className="register-image">
-            <img src={image} alt="register image" />
+            <img src={image} alt="register" width="100%" height="auto" title="register" loading="lazy" />
           </div>
         </div>
         <div className="form-wrapper">
@@ -101,7 +101,7 @@ const Registration = () => {
               <Trans>Create a new account</Trans>
             </h2>
             <label htmlFor="avatar" className="avatar" data-icon="&#x270E;">
-              <img src={avatar} width="200" />
+              <img src={avatar} width="100%" height="auto" title="avatar" alt="avatar" loading="lazy" />
             </label>
             <input
               type="file"

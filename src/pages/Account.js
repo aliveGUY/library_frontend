@@ -42,7 +42,7 @@ const Account = () => {
   if (isSuccess) {
     userInfo = [
       <div key="avatar" className="profile-photo">
-        <img src={user.avatar} alt="avatar" />
+        <img src={user.avatar} alt="avatar"  width="100%" height="auto" title="avatar" loading="eager"/>
       </div>,
       <div key="profile-info" className="profile-info">
         <h2>{user.username}</h2>

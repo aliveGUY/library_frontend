@@ -28,7 +28,7 @@ const CTAHero = () => (
       </Button>
     </div>
     <div className="image-wrapper">
-      <img src={logged_out_image} alt="hero image" />
+      <img src={logged_out_image} alt="hero"  width="100%" height="auto" title="hero" loading="eager"/>
     </div>
   </Section>
 )
@@ -36,7 +36,7 @@ const CTAHero = () => (
 const GreetingsHero = ({ name }) => (
   <Section className="home-heading-loggedin">
     <div className="image-wrapper">
-      <img src={logged_in_image} alt="hero image" />
+      <img src={logged_in_image} alt="hero" width="100%" height="auto" title="hero" loading="eager"/>
     </div>
     <div className="text-column">
       <h1>

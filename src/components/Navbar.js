@@ -120,7 +120,7 @@ const Navbar = () => {
   return (
     <Section className="navbar">
       <Link to="/" className="navbar-logo" >
-        <img src={logo} alt="nav logo" />
+        <img src={logo} alt="nav logo"  width="100%" height="auto" title="book card cover" loading="eager" />
       </Link>
       <nav className="navbar-burger" onClick={() => setDropDown(prev => !prev)}>
         <div className={`burger-${dropDown}`} />

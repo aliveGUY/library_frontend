@@ -172,7 +172,7 @@ useEffect(() => {
   const avatarInput = (
     <div className="avatar-wrapper">
       <label key="avatar label" htmlFor="avatar" className="avatar" data-icon="&#x270E;">
-        <img src={curAvatar} width="200" />
+        <img src={curAvatar}  width="100%" height="auto" title="img input" loading="eager" alt="img input" />
       </label>
       <input
         key="avatar input"

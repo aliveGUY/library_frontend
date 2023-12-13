@@ -73,7 +73,7 @@ const Login = () => {
       <Section className="login-section">
         <div className="login-image-wrapper">
           <div className="login-image">
-            <img src={image} alt="login image" />
+            <img src={image} alt="login" width="100%" height="auto" title="login" loading="lazy" />
           </div>
         </div>
         <div className="form-wrapper">

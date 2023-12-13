@@ -6,10 +6,9 @@ const Layout = ({ title, description, className, children }) => {
   return (
     <>
       <Helmet>
-        <meta charSet="utf-8" />
         <title>{title}</title>
-        <meta name="description" content={description}/>
-        <link ref="canonical" href={window.location.href} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={window.location.href} />
       </Helmet>
       <div className={`App ${className}`}>
         <Navbar key="navbar" />

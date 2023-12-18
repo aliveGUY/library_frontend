@@ -42,11 +42,13 @@ const Cart = () => {
         <span className="price">
           <Trans>{{ price }} UAH</Trans>
         </span>
-        {isLoading || !isAuthed
-          ? <LoadingSpinner />
-          : <Button theme="danger" onClick={() => removeFromCart({ id: _id })}>
-            <Trans>Delete</Trans>
-          </Button>
+        {!isLoading || !isAuthed
+          ? (
+            <Button theme="danger" onClick={() => removeFromCart({ id: _id })}>
+              <Trans>Delete</Trans>
+            </Button>
+          )
+          : <LoadingSpinner />
         }
 
       </div>

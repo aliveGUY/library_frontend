@@ -48,6 +48,7 @@ const Login = () => {
       const { user } = await login({ username, password }).unwrap()
       dispatch(setCredentials({ user }))
       const { cart } = await getCart({ user: user.id }).unwrap()
+      console.log(cart)
       dispatch(setCart({ cart }))
       navigate('/')
     } catch (err) {

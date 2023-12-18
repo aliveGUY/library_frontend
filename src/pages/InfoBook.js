@@ -8,19 +8,19 @@ import { Trans } from 'react-i18next'
 import BookCover from "components/BookCover"
 import useAuth from "hooks/useAuth"
 import { useDeleteBookMutation } from "app/api/booksApiSlice"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import useCart from "hooks/useCart"
 import { useUpdateCartMutation } from "app/api/cartApiSlice"
 
 const InfoBook = () => {
   const { pathname } = useLocation()
-  const regex = /\/book\/([a-fA-F0-9]+)/
-  const id = pathname.match(regex)[1]
+  const id = pathname.split('/').pop()
   const { id: authIndex, roles } = useAuth()
   const navigate = useNavigate()
   const { addToCart, cart } = useCart()
+  const [isAlreadyInCart, setAlreadyInCart] = useState(false)
   const isAuthed = Boolean(authIndex)
-  
+
   const {
     data,
     isLoading,
@@ -28,7 +28,6 @@ const InfoBook = () => {
     isError,
     error
   } = useGetBookByIdQuery({ id })
-  const bookAlreadyInCart = data && cart.some(item => item._id === data._id)
 
   const [updateCart, {
     isLoading: isCartUpdateLoading,
@@ -46,6 +45,13 @@ const InfoBook = () => {
       updateCart({ cart, user: id })
     }
   }, [cart]);
+
+  useEffect(() => {
+    if (cart && data) {
+      console.log(cart, data)
+      setAlreadyInCart(cart.some(item => item._id === data._id))
+    }
+  }, [cart, data]);
 
   useEffect(() => {
     if (isDeleteBookSuccess) {
@@ -74,9 +80,8 @@ const InfoBook = () => {
   if (isCartUpdateLoading) addBookToCart = <span className="button-loader"><LoadingSpinner /></span>
 
   if (isCartUpdateSuccess || !isAuthed) {
-    addBookToCart = bookAlreadyInCart
-      ?
-      <div className="book-lready-in-cart">
+    if (isAlreadyInCart) {
+      addBookToCart = <div className="book-lready-in-cart">
         <span>
           <Trans>book already in cart</Trans>
         </span>
@@ -84,14 +89,15 @@ const InfoBook = () => {
           <Trans>Add more</Trans>
         </Button>
       </div>
-      :
-      <Button theme="good" onClick={() => addToCart({ book: data })}>
+    } else {
+      addBookToCart = <Button theme="good" onClick={() => addToCart({ book: data })}>
         <Trans>Add to cart</Trans>
       </Button>
+    }
   }
 
   if (isSuccess && data) {
-    const { title, description, author, price, cover, user } = data
+    const { title, description, author, price = 0, cover, user } = data
     const isPermitted = authIndex === user || roles.includes("Admin")
 
 
@@ -108,7 +114,7 @@ const InfoBook = () => {
     )
 
     bookInfo = [
-      <div className="book-info-heading">
+      <div key="book text" className="book-info-heading">
         <h1>{title}</h1>
         <p>
           <Trans>by {{ author }}</Trans>
@@ -117,10 +123,10 @@ const InfoBook = () => {
           <Trans>View all the books belonging to this user</Trans>
         </a>
       </div>,
-      <div className="cover-wrapper">
+      <div key="book cover" className="cover-wrapper">
         <BookCover cover={cover} />
       </div>,
-      <div className="book-info-body">
+      <div key="book actions" className="book-info-body">
         <div className="cta">
           <span className="cost">
             <Trans>{{ price }} UAH</Trans>

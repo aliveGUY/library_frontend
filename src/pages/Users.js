@@ -57,15 +57,16 @@ const Users = () => {
           </thead>
           <tbody>
             {usersData.map((user, idx) => {
-              const { username, roles, _id } = user
+              const { username, roles, _id, bookStats, cartStats } = user
+              const formattedRoles = roles.join(", ")
               return (
                 <tr key={idx}>
                   <th>
                     <a href={`/account/${_id}`}>{username}</a>
                   </th>
-                  <th>{roles}</th>
-                  <th className="additional">N/A</th>
-                  <th className="additional">N/A</th>
+                  <th>{formattedRoles}</th>
+                  <th className="additional">{cartStats}</th>
+                  <th className="additional">{bookStats}</th>
                   <th>{isDeletionLoading
                     ? <LoadingSpinner />
                     : [

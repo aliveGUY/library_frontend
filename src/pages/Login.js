@@ -13,6 +13,13 @@ import Button from "components/Button"
 import image from 'images/sections/login-image.png'
 import { useGetCartMutation } from "app/api/cartApiSlice"
 import { setCart } from "app/api/cartSlice"
+import { signal } from "@preact/signals-react"
+
+const username = signal('')
+const handleUserInput = (e) => username.value = e.target.value
+
+const password = signal('')
+const handlePwdInput = (e) => password.value = e.target.value
 
 
 const Login = () => {
@@ -20,23 +27,19 @@ const Login = () => {
   const title = t("IMBook — Login")
   const description = t("IMBook gives writers the opportunity to monetize their stories, find a publisher, and more. Join our community to realize all your ideas.")
   const userRef = useRef()
-  const [username, setUser] = useState('')
-  const [password, setPwd] = useState('')
   const [errMsg, setErrMsg] = useState('')
   const [persist, setPersist] = usePersist()
   const navigate = useNavigate()
 
+
   const [login, { isLoading }] = useLoginMutation()
   const [getCart] = useGetCartMutation()
   const dispatch = useDispatch()
+  const handleToggle = () => setPersist(prev => !prev)
 
   useEffect(() => {
     userRef.current.focus()
   }, [])
-
-  useEffect(() => {
-    setErrMsg('')
-  }, [username, password])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -46,8 +49,6 @@ const Login = () => {
       dispatch(setCredentials({ user }))
       const { cart } = await getCart({ user: user.id }).unwrap()
       dispatch(setCart({ cart }))
-      setUser('')
-      setPwd('')
       navigate('/')
     } catch (err) {
       console.log(err)
@@ -64,9 +65,6 @@ const Login = () => {
     }
   }
 
-  const handleUserInput = (e) => setUser(e.target.value)
-  const handleToggle = () => setPersist(prev => !prev)
-  const handlePwdInput = (e) => setPwd(e.target.value)
 
   const content = isLoading ? <LoadingSpinner /> : (
     <Layout className="login-page" title={title} description={description}>
@@ -90,7 +88,7 @@ const Login = () => {
               data-testid="username"
               id="username"
               ref={userRef}
-              value={username}
+              value={username.value}
               onChange={handleUserInput}
               autoComplete="off"
               required
